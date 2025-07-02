@@ -1,0 +1,1 @@
+input：--train_path /home/yyx/TIMIT/TRAIN --val_path /home/yyx/TIMIT/VAL --test_path /home/yyx/TIMIT/TEST --run_dir /home/yyx/hideandspeak-log --loss_type abs --num_iters 80 --single True --message_file /home/yyx/TIMIT/TRAIN/SA1.WAV.wav --batch_size 128
