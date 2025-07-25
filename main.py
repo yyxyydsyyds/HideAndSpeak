@@ -15,11 +15,22 @@ from config import get_hparams
 
 from solver import Solver
 from config import gl_hparams 
+from model import Discriminator 
+
+try:
+    from comet_ml import Experiment as CometExperiment
+    import wandb
+    EXTERNAL_LOGGING_AVAILABLE = True
+except Exception as e:
+    EXTERNAL_LOGGING_AVAILABLE = False
 
 torch.manual_seed(0)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 #gl_hparams=None
+
+lambda_carrier_values = [0.1, 0.5, 1.0, 2.0, 5.0]  
+lambda_msg_values = [0.1, 0.5, 1.0, 2.0, 5.0]
 
 class LitModel(L.LightningModule):
     def __init__(self):
@@ -185,20 +196,24 @@ def run(hparams):
     solver = Solver(hparams)
     
     encoder, decoder, optimizer, scheduler = get_models(hparams)
-
+    logger.info(f"hparams.mode:{hparams.mode}")
     if hparams.mode == 'train':
         if hparams.single is True:
-        #     train_loader = train_single_dataloader(hparams.train_path, hparams.message_file, hparams.batch_size, hparams.num_workers)
-        #     val_loader   = val_single_dataloader(hparams.val_path, hparams.message_file, hparams.batch_size, hparams.num_workers)
-            train_loader = train_single_dataloader(hparams.train_path, hparams.message_file, 128, hparams.num_workers)
-            val_loader   = val_single_dataloader(hparams.val_path, hparams.message_file, 128, hparams.num_workers)
+            train_loader = train_single_dataloader(hparams.train_path, hparams.message_file, hparams.batch_size, hparams.num_workers)
+            val_loader   = val_single_dataloader(hparams.val_path, hparams.message_file, hparams.batch_size, hparams.num_workers)
         else:
             train_loader = train_dataloader(hparams.train_path, hparams.batch_size, hparams.num_workers)
             val_loader   = val_dataloader(hparams.val_path, hparams.batch_size, hparams.num_workers)
 
         logger.info(f"loaded train ({len(train_loader)}), val ({len(val_loader)})")
 
-        solver.train(train_loader, val_loader, encoder, decoder, optimizer, scheduler)
+        if hparams.GAN_model is True:
+            discriminator = Discriminator().to(device)
+            optimizer_G = torch.optim.Adam(list(encoder.parameters()) + list(decoder.parameters()), lr=hparams.lr)
+            optimizer_D = torch.optim.Adam(discriminator.parameters(), lr=hparams.lr)
+            solver.train_gan(train_loader, val_loader, encoder, decoder, discriminator, optimizer_G, optimizer_D, scheduler)
+        else:    
+            solver.train(train_loader, val_loader, encoder, decoder, optimizer, scheduler)
     elif hparams.mode == 'test':
         if hparams.single is True:
             test_loader = test_single_dataloader(hparams.test_path, hparams.message_file, hparams.batch_size)
@@ -213,14 +228,28 @@ def run(hparams):
         # solver.eval_mode()
         # solver.sample_examples()
 
-
+freeze_num_list=[1, 5, 10, 20]
 
 def main():
     global gl_hparams
     if(gl_hparams==None): 
-        gl_hparams = get_hparams()    
-    print(f"batch_size:{gl_hparams.batch_size}")
-    run(gl_hparams)
+        gl_hparams = get_hparams()  
+
+    # gl_hparams.lambda_carrier_loss = 1
+    for i in range(3):
+        # gl_hparams.lambda_msg_loss = i
+        # gl_hparams.lr = lr
+        gl_hparams.freeze_num = freeze_num_list[i]
+        
+        run(gl_hparams)
+        logger.info(f"Training complete!lr:{gl_hparams.lr}")
+        torch.cuda.empty_cache()
+        wandb.finish()
+        logger.info("Training complete!")
+    logger.info(f"lr: {gl_hparams.lr}, batch_size: {gl_hparams.batch_size}, mode: {gl_hparams.mode}, single: {gl_hparams.single}, lambda_carrier: {gl_hparams.lambda_carrier_loss}, lambda_msg: {gl_hparams.lambda_msg_loss}, freeze_num: {gl_hparams.freeze_num}")
+    # run(gl_hparams)
+    # logger.info("Training complete!")
+    # logger.info(f"")
 
 if __name__ == '__main__':
     main()

@@ -89,6 +89,7 @@ class Experiment(object):
 
         # wandb
         self.wandb_exp = False
+        logger.info(f"EXTERNAL_LOGGING_AVAILABLE: {EXTERNAL_LOGGING_AVAILABLE}, use_wandb: {use_wandb}")
         if EXTERNAL_LOGGING_AVAILABLE and use_wandb:
             self.wandb_exp = True
             wandb.init(name=self.exp_name,
@@ -155,7 +156,8 @@ class Experiment(object):
 
             # log in wandb
             if self.wandb_exp:
-                wandb.log({k: v}, step=step)
+                # wandb.log({k: v}, step=step)
+                wandb.log(metrics_dict, step=step)
 
         self.metrics.append({**metrics_dict, **{'timestamp': str(datetime.utcnow())}})
 

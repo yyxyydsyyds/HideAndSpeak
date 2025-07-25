@@ -30,6 +30,11 @@ def get_hparams():
 
     parser.add_argument('--single', type=bool, default=False)
     parser.add_argument('--message_file', type=str)
+
+    parser.add_argument('--GAN_model', type=bool, default=False, help='use GAN model for training')
+    parser.add_argument('--freeze_num', type=int, default=1, help='num of epochs to freeze discriminator')
+
+
     gl_hparams = parser.parse_args()
     return gl_hparams
 
