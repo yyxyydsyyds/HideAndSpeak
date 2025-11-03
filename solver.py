@@ -15,13 +15,141 @@ from hparams import AUDIO_LEN, HOP_LENGTH, N_FFT
 from stft.stft import STFT
 from config import get_hparams
 from config import gl_hparams
+from config import device
+import warnings
+
+
 
 if(gl_hparams==None): 
     gl_hparams = get_hparams()
 
 spect_audio_shape = (gl_hparams.batch_size, 1, 129, 378)
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+# device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+def forward_encoder(encoder, carrier, msg, model_type):
+    if model_type == 'unet':
+        x = torch.cat([carrier, msg], dim=1)
+        return encoder(x)
+    else:  # original
+        return encoder(carrier, msg)
+
+# def unet_snr_per_channel(orig: torch.Tensor, recon: torch.Tensor) -> dict:
+#     """
+#     分通道计算SNR - 这才能体现三通道的意义
+    
+#     Args:
+#         orig: 原始数据 (batch, 3, H, W)
+#         recon: 重建数据 (batch, 3, H, W)
+    
+#     Returns:
+#         dict: {
+#             'magnitude_snr': float,  # 幅度通道SNR
+#             'phase_snr': float,      # 相位通道SNR
+#             'power_snr': float,      # 功率通道SNR
+#             'mean_snr': float        # 三通道平均SNR
+#         }
+#     """
+#     assert orig.shape == recon.shape, f"Shape mismatch: orig {orig.shape} vs recon {recon.shape}"
+#     assert orig.shape[1] == 3, f"Expected 3 channels, got {orig.shape[1]}"
+    
+#     orig, recon = orig.cpu(), recon.cpu()
+    
+#     channel_names = ['magnitude', 'phase', 'power']
+#     results = {}
+    
+#     # 对每个通道分别计算SNR
+#     for i, name in enumerate(channel_names):
+#         # 提取单个通道 (batch, 1, H, W)
+#         orig_channel = orig[:, i:i+1, :, :]
+#         recon_channel = recon[:, i:i+1, :, :]
+        
+#         # 计算该通道的SNR（与Normal模式相同的计算方式）
+#         N = orig_channel.shape[1] * orig_channel.shape[2] * orig_channel.shape[3]
+#         rms_signal = ((torch.sum(orig_channel ** 2) / N) ** 0.5)
+#         rms_noise = ((torch.sum((orig_channel - recon_channel) ** 2) / N) ** 0.5)
+#         snr = 10 * torch.log10((rms_signal / rms_noise) ** 2)
+        
+#         results[f'{name}_snr'] = snr.item()
+    
+#     # 计算平均SNR（可选）
+#     results['mean_snr'] = np.mean([results['magnitude_snr'], 
+#                                    results['phase_snr'], 
+#                                    results['power_snr']])
+    
+#     return results
+
+
+# def unet_snr(orig: torch.Tensor, recon: torch.Tensor) -> torch.Tensor:
+#     """
+#     计算UNet模式下的信噪比
+    
+#     修正：正确处理多通道数据 (batch, 3, H, W)
+    
+#     Args:
+#         orig: 原始数据 (batch, 3, 129, 378)
+#         recon: 重建数据 (batch, 3, 129, 378)
+    
+#     Returns:
+#         SNR值（dB）
+#     """
+#     assert orig.shape == recon.shape, f"Shape mismatch: orig {orig.shape} vs recon {recon.shape}"
+    
+#     orig, recon = orig.cpu(), recon.cpu()
+    
+#     # 计算所有需要平均的元素数量：通道数 * 高度 * 宽度
+#     # 对于 (batch, 3, 129, 378)，N = 3 * 129 * 378 = 146,286
+#     N = orig.shape[1] * orig.shape[2] * orig.shape[3]  # C * H * W
+    
+#     # 对每个batch样本分别计算，然后平均
+#     batch_size = orig.shape[0]
+#     snr_list = []
+    
+#     for i in range(batch_size):
+#         orig_sample = orig[i]  # (3, 129, 378)
+#         recon_sample = recon[i]  # (3, 129, 378)
+        
+#         # 计算RMS
+#         rms_signal = ((torch.sum(orig_sample ** 2) / N) ** 0.5)
+#         rms_noise = ((torch.sum((orig_sample - recon_sample) ** 2) / N) ** 0.5)
+        
+#         # 计算SNR
+#         snr_value = 10 * torch.log10((rms_signal / rms_noise) ** 2)
+#         snr_list.append(snr_value)
+    
+#     # 返回batch的平均SNR
+#     return torch.mean(torch.stack(snr_list))
+
+
+# def unet_snr_v2(orig: torch.Tensor, recon: torch.Tensor) -> torch.Tensor:
+#     """
+#     计算UNet模式下的信噪比（与Normal模式计算逻辑一致）
+    
+#     这个版本与solver.py中的snr函数保持相同的计算逻辑
+    
+#     Args:
+#         orig: 原始数据 (batch, 1, 129, 378)
+#         recon: 重建数据 (batch, 3, 129, 378)
+    
+#     Returns:
+#         SNR值（dB）
+#     """
+#     assert orig.shape == recon.shape, f"Shape mismatch: orig {orig.shape} vs recon {recon.shape}"
+    
+#     orig, recon = orig.cpu(), recon.cpu()
+    
+#     # 计算总的元素数量（包括所有通道和空间维度，不包括batch）
+#     # 对于 (batch, 3, 129, 378): N = 3 * 129 * 378 = 146,286
+#     N = orig.shape[1] * orig.shape[2] * orig.shape[3]
+    
+#     # 对整个batch计算（与Normal模式一致）
+#     rms_signal = ((torch.sum(orig ** 2) / N) ** 0.5)
+#     rms_noise = ((torch.sum((orig - recon) ** 2) / N) ** 0.5)
+    
+#     snr = 10 * torch.log10((rms_signal / rms_noise) ** 2)
+    
+#     return snr
+
 
 def snr(orig: torch.Tensor, recon: torch.Tensor) -> torch.Tensor:
     try:
@@ -32,6 +160,7 @@ def snr(orig: torch.Tensor, recon: torch.Tensor) -> torch.Tensor:
     orig, recon = orig.cpu(), recon.cpu()
     rms1 = ((torch.sum(orig ** 2) / N) ** 0.5)
     rms2 = ((torch.sum((orig - recon) ** 2) / N) ** 0.5)
+    # print(rms1, rms2)
     snr = 10 * torch.log10((rms1 / rms2) ** 2)
     return snr
 
@@ -57,23 +186,6 @@ def save_models(ckpt_dir, encoder, decoder, suffix=''):
     torch.save(encoder.state_dict(), join(ckpt_dir, suffix, "encoder.ckpt"))
     torch.save(decoder.state_dict(), join(ckpt_dir, suffix, "decoder.ckpt"))
 
-# # 定义判别器
-# class Discriminator(nn.Module):
-#     def __init__(self, input_shape):
-#         super().__init__()
-#         # 卷积层序列
-#         self.conv = nn.Sequential(
-#             nn.Conv2d(input_shape[0], 64, 4, 2, 1),
-#             nn.LeakyReLU(0.2),
-#             # 更多层...
-#             nn.Conv2d(512, 1, 4, 1, 0),
-#             nn.Sigmoid()
-#         )
-    
-#     def forward(self, x):
-#         return self.conv(x).view(-1, 1).squeeze(1)
-
-
 class Solver(object):
     def __init__(self, config):
         self.config = config
@@ -88,7 +200,7 @@ class Solver(object):
                                 'mini':  AUDIO_LEN * 16000}[self.dataset])
 
         # create experimentsamples_dir
-        self.experiment    = Experiment(config.run_dir, use_comet=False, use_wandb=True)
+        self.experiment    = Experiment(config.run_dir, use_comet=False, use_wandb=getattr(config, 'use_wandb', False))
         self.run_dir       = self.experiment.dir
         self.ckpt_dir      = self.experiment.ckpt_dir
         self.code_dir      = self.experiment.code_dir
@@ -102,6 +214,8 @@ class Solver(object):
         self.print_every        = 10
         self.mode               = 'test'
 
+        self.model_type          = config.model_type
+
         self.create_dirs()
         torch.manual_seed(10)
 
@@ -113,12 +227,25 @@ class Solver(object):
         
         # logging
         logger.add(join(self.run_dir, "stdout.log"))
+        # no solver-level wandb initialization; Experiment handles external logging when use_wandb is set
+        # global step counter for external loggers (ensures monotonic steps)
+        self.global_step = 0
 
     def log_losses(self, losses, iteration=None):
         if iteration is None:
             iteration = self.cur_iter
+        # Ensure strictly monotonic steps by incrementing the global step first
+        if not hasattr(self, 'global_step'):
+            self.global_step = 0
+        # advance global step so each call uses a larger step than previous
+        try:
+            self.global_step += 1
+            step_for_logging = self.global_step
+        except Exception:
+            step_for_logging = iteration
 
-        self.experiment.log_metric(losses, step=iteration)
+        # Prefer Experiment-level logging which handles tensorboard and (optionally) wandb consistently
+        self.experiment.log_metric(losses, step=step_for_logging)
 
     def create_dirs(self):
         makedirs(self.samples_dir, exist_ok=True)
@@ -183,12 +310,11 @@ class Solver(object):
                 optimizer_G.step()
 
                 # 在train_gan的for epoch in epoch_it:循环内，每个epoch结束时添加如下代码
-            if self.experiment.wandb_exp:
-                import wandb
-                wandb.log({
-                    "lambda_carrier": self.config.lambda_carrier_loss,
-                    "lambda_msg": self.config.lambda_msg_loss
-                }, step=epoch)
+            # log lambda values via Solver logging helper to ensure monotonic steps
+            self.log_losses({
+                "lambda_carrier": self.config.lambda_carrier_loss,
+                "lambda_msg": self.config.lambda_msg_loss
+            }, iteration=epoch)
 
             for k, v in list(epoch_loss.items()):
                 epoch_loss["epoch_" + k] = np.mean(v)
@@ -196,11 +322,14 @@ class Solver(object):
             epoch_loss['lr'] = lr
             self.log_losses(epoch_loss, iteration=epoch)
 
+            # epoch stats already logged via self.log_losses above; nothing extra needed here
+
             # 保存模型
             save_models(self.ckpt_dir, encoder, decoder, suffix=str(epoch+1) + "_epoch")
 
             # 验证集评估
             self.log_losses(self.test(val_dataloader, encoder, decoder, data='val'), iteration=epoch)
+        logger.info("finished training!")
 
 
     def train(self, train_dataloader, val_dataloader, encoder, decoder, optimizer, scheduler):
@@ -227,7 +356,8 @@ class Solver(object):
                     print(f"carrier.shape:{carrier.shape},msg.shape:{msg.shape},spect_audio_shape:{spect_audio_shape}")
                 # feedforward and suffer loss
                 carrier, msg = carrier.to(device), msg.to(device)
-                carrier_reconst = encoder(carrier, msg)
+                # carrier_reconst = encoder(carrier, msg)
+                carrier_reconst = forward_encoder(encoder, carrier, msg, self.model_type)
                 msg_reconst     = decoder(carrier_reconst)
                 loss, losses_log = training_step(carrier, carrier_reconst, msg, msg_reconst, self.config.lambda_carrier_loss, self.config.lambda_msg_loss, self.config.loss_type)
 
@@ -255,6 +385,8 @@ class Solver(object):
                 epoch_loss.pop(k)
             epoch_loss['lr'] = lr
             self.log_losses(epoch_loss, iteration=epoch)
+
+            # epoch stats are already logged via self.log_losses
 
             # save model every epoch
             save_models(self.ckpt_dir, encoder, decoder, suffix=str(epoch+1) + "_epoch")
@@ -305,6 +437,9 @@ class Solver(object):
             logger.info(f"carrier SnR: {np.mean(carrier_snr_list)}")
             logger.info(f"message loss: {avg_msg_loss/len(test_dataloader)}")
             logger.info(f"message SnR: {np.mean(msg_snr_list)}")
+
+            # log validation/test metrics via Solver logging helper to ensure monotonic steps
+            self.log_losses({ "carrier_snr": np.mean(carrier_snr_list), "msg_snr": np.mean(msg_snr_list) }, iteration=self.cur_iter)
 
         return {'val epoch carrier loss': avg_carrier_loss/len(test_dataloader),
                 'val epoch msg loss': avg_msg_loss/len(test_dataloader),

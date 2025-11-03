@@ -87,14 +87,19 @@ class Experiment(object):
             self.comet_exp.set_name(self.exp_name)
             self.comet_exp.log_parameter("exp_name", self.exp_name)
 
-        # wandb
+        # wandb - import lazily to avoid top-level dependency failure
         self.wandb_exp = False
         logger.info(f"EXTERNAL_LOGGING_AVAILABLE: {EXTERNAL_LOGGING_AVAILABLE}, use_wandb: {use_wandb}")
         if EXTERNAL_LOGGING_AVAILABLE and use_wandb:
-            self.wandb_exp = True
-            wandb.init(name=self.exp_name,
-                       project=self.project_name,
-                       dir=self.dir)
+            try:
+                import wandb
+                self.wandb_exp = True
+                wandb.init(name=self.exp_name,
+                           project=self.project_name,
+                           dir=self.dir)
+            except Exception as e:
+                logger.warning(f"wandb init failed: {e}")
+                self.wandb_exp = False
 
         atexit.register(self.save)
 
@@ -124,7 +129,11 @@ class Experiment(object):
 
         # log hparams into wandb
         if self.wandb_exp:
-            wandb.config.update(hparams)
+            try:
+                import wandb
+                wandb.config.update(hparams)
+            except Exception:
+                pass
 
         logger.info("hyper-parameters:\n" + yaml.dump(hparams, default_flow_style=False)[:-1])
 
@@ -154,10 +163,14 @@ class Experiment(object):
             if self.comet_exp:
                 self.comet_exp.log_metric(k, v, step=step)
 
-            # log in wandb
-            if self.wandb_exp:
-                # wandb.log({k: v}, step=step)
+        # log to wandb as a single dict call to preserve consistent step semantics
+        if self.wandb_exp:
+            try:
+                import wandb
                 wandb.log(metrics_dict, step=step)
+            except Exception:
+                # be defensive: if wandb complains, don't raise here
+                pass
 
         self.metrics.append({**metrics_dict, **{'timestamp': str(datetime.utcnow())}})
 
@@ -174,7 +187,7 @@ if __name__ == "__main__":
     parser.add_argument('--augment', default=True, type=bool)
     args = parser.parse_args()
     
-    exp = Experiment('/tmp/exp', use_comet=True, use_wandb=True)
+    exp = Experiment('/tmp/exp', use_comet=True, use_wandb=False)#True)
     exp.save_hparams(args)
     exp.log_metric({'metrics/loss': 0.5})
     exp.log_metric({'metrics/loss': 0.4, 'metrics/acc': 0.99})

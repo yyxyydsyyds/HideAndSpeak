@@ -1,0 +1,5 @@
+[default]
+entity = 1141718715-
+project = unihide
+base_url = https://api.wandb.ai
+

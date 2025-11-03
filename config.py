@@ -1,6 +1,20 @@
 import argparse
-
+import torch
 gl_hparams = None
+
+DEBUG = False  # 改为 True 启用，False 禁用
+
+def debug_print(*args, **kwargs):
+    if DEBUG:
+        print(*args, **kwargs)
+
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+# if torch.cuda.device_count() > 1:
+#     print(f"Using {torch.cuda.device_count()} GPUs!")
+#     device = torch.device("cuda")
+# else:
+    # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def get_hparams():
     global gl_hparams
@@ -31,8 +45,11 @@ def get_hparams():
     parser.add_argument('--single', type=bool, default=False)
     parser.add_argument('--message_file', type=str)
 
-    parser.add_argument('--GAN_model', type=bool, default=False, help='use GAN model for training')
+    parser.add_argument('--model_type', type=str, default='normal', choices=['normal','GAN','unet'], help='type of model')
     parser.add_argument('--freeze_num', type=int, default=1, help='num of epochs to freeze discriminator')
+    parser.add_argument('--norm', default='instance', help='batch or instance')
+    parser.add_argument('--use_wandb', action='store_true', help='enable wandb logging')
+
 
 
     gl_hparams = parser.parse_args()
