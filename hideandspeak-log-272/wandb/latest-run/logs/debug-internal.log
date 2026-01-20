@@ -1,0 +1,18 @@
+{"time":"2025-11-22T14:06:07.89883109+08:00","level":"INFO","msg":"stream: starting","core version":"0.19.11","symlink path":"/home/yyx/hideandspeak-log-272/wandb/run-20251122_140607-4hw6mhbw/logs/debug-core.log"}
+{"time":"2025-11-22T14:06:08.767146618+08:00","level":"INFO","msg":"created new stream","id":"4hw6mhbw"}
+{"time":"2025-11-22T14:06:08.767195308+08:00","level":"INFO","msg":"stream: started","id":"4hw6mhbw"}
+{"time":"2025-11-22T14:06:08.768836386+08:00","level":"INFO","msg":"handler: started","stream_id":"4hw6mhbw"}
+{"time":"2025-11-22T14:06:08.768877514+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"4hw6mhbw"}
+{"time":"2025-11-22T14:06:08.769089785+08:00","level":"INFO","msg":"sender: started","stream_id":"4hw6mhbw"}
+{"time":"2025-11-22T14:06:09.262532761+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-11-22T14:48:18.707632189+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/1141718715-/yyx/4hw6mhbw/file_stream\": unexpected EOF"}
+{"time":"2025-11-22T14:53:07.20390215+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/1141718715-/yyx/4hw6mhbw/file_stream\": unexpected EOF"}
+{"time":"2025-11-22T15:03:48.634446318+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/1141718715-/yyx/4hw6mhbw/file_stream\": unexpected EOF"}
+{"time":"2025-11-22T15:17:03.541763387+08:00","level":"INFO","msg":"stream: closing","id":"4hw6mhbw"}
+{"time":"2025-11-22T15:17:03.541798674+08:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-11-22T15:17:03.541903669+08:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-11-22T15:17:06.794070101+08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-22T15:17:07.486993586+08:00","level":"INFO","msg":"handler: closed","stream_id":"4hw6mhbw"}
+{"time":"2025-11-22T15:17:07.487058509+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"4hw6mhbw"}
+{"time":"2025-11-22T15:17:07.487065524+08:00","level":"INFO","msg":"sender: closed","stream_id":"4hw6mhbw"}
+{"time":"2025-11-22T15:17:07.487916758+08:00","level":"INFO","msg":"stream: closed","id":"4hw6mhbw"}

@@ -1,0 +1,1550 @@
+[32m2025-11-22 14:06:09.346[0m | [1mINFO    [0m | [36mexperiment[0m:[36msave_hparams[0m:[36m112[0m - [1mparsing ArgumentParser hparams[0m
+[32m2025-11-22 14:06:09.348[0m | [1mINFO    [0m | [36mexperiment[0m:[36msave_hparams[0m:[36m124[0m - [1mhparams file saved to: /home/yyx/hideandspeak-log-272/hparams.yaml[0m
+[32m2025-11-22 14:06:09.352[0m | [1mINFO    [0m | [36mexperiment[0m:[36msave_hparams[0m:[36m138[0m - [1mhyper-parameters:
+ablate_mode: tile
+batch_size: 32
+block_type: normal
+cols: 8
+dataset: timit
+dec_c_n_layers: 4
+enc_n_layers: 3
+freeze_num: 1
+lambda_carrier_loss: 9.0
+lambda_msg_loss: 1.0
+load_ckpt: null
+loss_type: mse
+lr: 0.0015
+max_batches: 10
+message_file: /home/yyx/TIMIT/TRAIN/SA1.WAV.wav
+mode: train
+model_type: normal
+n_pairs: 32
+norm: instance
+num_iters: 80
+num_workers: 20
+outdir: ablate_out
+rows: 8
+run_dir: /home/yyx/hideandspeak-log
+sample_every: null
+save_model_every: null
+single: true
+target: container
+test_path: /home/yyx/TIMIT/TEST
+train_path: /home/yyx/TIMIT/TRAIN
+use_wandb: true
+val_path: /home/yyx/TIMIT/VAL[0m
+[32m2025-11-22 14:06:09.353[0m | [1mINFO    [0m | [36msolver[0m:[36mcreate_dirs[0m:[36m185[0m - [1mcreated dirs[0m
+[32m2025-11-22 14:06:10.001[0m | [34m[1mDEBUG   [0m | [36mmodel[0m:[36mget_models[0m:[36m186[0m - [34m[1mFullEncoder(
+  (encoder_first): Encoder(
+    (main): Sequential(
+      (0): GatedBlock(
+        (conv): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (1): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (2): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+    )
+  )
+  (encoder_second): CarrierDecoder(
+    (main): Sequential(
+      (0): GatedBlock(
+        (conv): Conv2d(65, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(65, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (1): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (2): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (3): GatedBlock(
+        (conv): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+        (gate): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+  )
+)[0m
+[32m2025-11-22 14:06:10.002[0m | [34m[1mDEBUG   [0m | [36mmodel[0m:[36mget_models[0m:[36m187[0m - [34m[1mMsgDecoder(
+  (main): Sequential(
+    (0): GatedBlock(
+      (conv): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (1): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): GatedBlock(
+      (conv): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+)[0m
+[32m2025-11-22 14:06:10.003[0m | [1mINFO    [0m | [36m__main__[0m:[36mrun[0m:[36m349[0m - [1mhparams.mode:train[0m
+[32m2025-11-22 14:06:10.019[0m | [1mINFO    [0m | [36m__main__[0m:[36mrun[0m:[36m363[0m - [1mloaded train (144), val (26)[0m
+Epoch 0, LR=0.0015:   0%|                                                                                                          | 0/80 [00:00<?, ?it/s][32m2025-11-22 14:06:10.021[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0000, msg_loss: 0.0149: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.65it/s]
+[32m2025-11-22 14:06:49.495[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 1_epoch[0m
+[32m2025-11-22 14:06:49.541[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:06:49.542[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.13it/s]
+[32m2025-11-22 14:06:57.842[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.89it/s]
+[32m2025-11-22 14:06:57.843[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 1.5771629687850902e-05[0m
+[32m2025-11-22 14:06:57.844[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 34.07685470581055[0m
+[32m2025-11-22 14:06:57.844[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.014831138058350636[0m
+[32m2025-11-22 14:06:57.845[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 0.7977338433265686[0m
+Epoch 1, LR=0.0015:   1%|█▏                                                                                              | 1/80 [00:47<1:02:58, 47.83s/it][32m2025-11-22 14:06:57.851[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0000, msg_loss: 0.0148: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.67it/s]
+[32m2025-11-22 14:07:37.055[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 2_epoch[0m
+[32m2025-11-22 14:07:37.072[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:07:37.073[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.30it/s]
+[32m2025-11-22 14:07:44.968[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  7.73it/s]
+[32m2025-11-22 14:07:44.969[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 1.1372292647138238e-05[0m
+[32m2025-11-22 14:07:44.969[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 35.49713897705078[0m
+[32m2025-11-22 14:07:44.970[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.014762900590610046[0m
+[32m2025-11-22 14:07:44.970[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 0.817789614200592[0m
+Epoch 2, LR=0.0015:   2%|██▍                                                                                             | 2/80 [01:34<1:01:38, 47.41s/it][32m2025-11-22 14:07:44.975[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0000, msg_loss: 0.0160: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.63it/s]
+[32m2025-11-22 14:08:24.661[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 3_epoch[0m
+[32m2025-11-22 14:08:24.682[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:08:24.682[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.19it/s]
+[32m2025-11-22 14:08:32.831[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  8.00it/s]
+[32m2025-11-22 14:08:32.832[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 5.74621799387387e-06[0m
+[32m2025-11-22 14:08:32.832[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 38.46179962158203[0m
+[32m2025-11-22 14:08:32.832[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0162168348637911[0m
+[32m2025-11-22 14:08:32.833[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 0.4096962809562683[0m
+Epoch 3, LR=0.0015:   4%|███▌                                                                                            | 3/80 [02:22<1:01:06, 47.62s/it][32m2025-11-22 14:08:32.838[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0000, msg_loss: 0.0152: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.69it/s]
+[32m2025-11-22 14:09:11.883[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 4_epoch[0m
+[32m2025-11-22 14:09:11.987[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:09:11.988[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.30it/s]
+[32m2025-11-22 14:09:19.865[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  6.10it/s]
+[32m2025-11-22 14:09:19.866[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 1.7677114888451447e-06[0m
+[32m2025-11-22 14:09:19.866[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 43.581504821777344[0m
+[32m2025-11-22 14:09:19.866[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.015051671769469976[0m
+[32m2025-11-22 14:09:19.867[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 0.7336737513542175[0m
+Epoch 4, LR=0.0015:   5%|████▊                                                                                           | 4/80 [03:09<1:00:01, 47.39s/it][32m2025-11-22 14:09:19.870[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0000, msg_loss: 0.0145: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.66it/s]
+[32m2025-11-22 14:09:59.223[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 5_epoch[0m
+[32m2025-11-22 14:09:59.267[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:09:59.268[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.08it/s]
+[32m2025-11-22 14:10:07.706[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  5.53it/s]
+[32m2025-11-22 14:10:07.706[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 1.796341166482307e-05[0m
+[32m2025-11-22 14:10:07.707[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 33.51173400878906[0m
+[32m2025-11-22 14:10:07.707[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.014420906404176584[0m
+[32m2025-11-22 14:10:07.707[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 0.9195438623428345[0m
+Epoch 5, LR=0.0015:   6%|██████▏                                                                                           | 5/80 [03:57<59:26, 47.55s/it][32m2025-11-22 14:10:07.712[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0000, msg_loss: 0.0145: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.66it/s]
+[32m2025-11-22 14:10:47.052[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 6_epoch[0m
+[32m2025-11-22 14:10:47.139[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:10:47.140[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  2.99it/s]
+[32m2025-11-22 14:10:55.826[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.15it/s]
+[32m2025-11-22 14:10:55.827[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 2.051832094506468e-05[0m
+[32m2025-11-22 14:10:55.827[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 32.9342041015625[0m
+[32m2025-11-22 14:10:55.828[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.014319320674985647[0m
+[32m2025-11-22 14:10:55.828[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 0.9502442479133606[0m
+Epoch 6, LR=0.0015:   8%|███████▎                                                                                          | 6/80 [04:45<58:53, 47.74s/it][32m2025-11-22 14:10:55.832[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0000, msg_loss: 0.0152: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.64it/s]
+[32m2025-11-22 14:11:35.403[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 7_epoch[0m
+[32m2025-11-22 14:11:35.496[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:11:35.496[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.10it/s]
+[32m2025-11-22 14:11:43.893[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.26it/s]
+[32m2025-11-22 14:11:43.894[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 1.6684313357892768e-06[0m
+[32m2025-11-22 14:11:43.895[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 43.83253860473633[0m
+[32m2025-11-22 14:11:43.895[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.015338687512737054[0m
+[32m2025-11-22 14:11:43.896[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 0.6515657901763916[0m
+Epoch 7, LR=0.0015:   9%|████████▌                                                                                         | 7/80 [05:33<58:13, 47.85s/it][32m2025-11-22 14:11:43.900[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0000, msg_loss: 0.0145: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:38<00:00,  3.72it/s]
+[32m2025-11-22 14:12:22.575[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 8_epoch[0m
+[32m2025-11-22 14:12:22.680[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:12:22.681[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.47it/s]
+[32m2025-11-22 14:12:30.185[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  7.19it/s]
+[32m2025-11-22 14:12:30.185[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 2.281653360114433e-05[0m
+[32m2025-11-22 14:12:30.186[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 32.47312545776367[0m
+[32m2025-11-22 14:12:30.186[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.014831440809827585[0m
+[32m2025-11-22 14:12:30.186[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 0.7976618409156799[0m
+Epoch 8, LR=0.0015:  10%|█████████▊                                                                                        | 8/80 [06:20<56:49, 47.35s/it][32m2025-11-22 14:12:30.191[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0086: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.67it/s]
+[32m2025-11-22 14:13:09.443[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 9_epoch[0m
+[32m2025-11-22 14:13:09.526[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:13:09.534[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.26it/s]
+[32m2025-11-22 14:13:17.510[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  6.01it/s]
+[32m2025-11-22 14:13:17.510[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.521569151735793e-05[0m
+[32m2025-11-22 14:13:17.511[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.750425338745117[0m
+[32m2025-11-22 14:13:17.511[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.008033716764587622[0m
+[32m2025-11-22 14:13:17.511[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 3.464001178741455[0m
+Epoch 9, LR=0.0015:  11%|███████████                                                                                       | 9/80 [07:07<56:01, 47.34s/it][32m2025-11-22 14:13:17.515[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0071: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.65it/s]
+[32m2025-11-22 14:13:57.001[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 10_epoch[0m
+[32m2025-11-22 14:13:57.067[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:13:57.068[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.53it/s]
+[32m2025-11-22 14:14:04.446[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  7.05it/s]
+[32m2025-11-22 14:14:04.446[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 0.0001096119079962731[0m
+[32m2025-11-22 14:14:04.447[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 25.657045364379883[0m
+[32m2025-11-22 14:14:04.448[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.006678654471985423[0m
+[32m2025-11-22 14:14:04.448[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 4.267375946044922[0m
+Epoch 10, LR=0.0015:  12%|████████████                                                                                    | 10/80 [07:54<55:05, 47.22s/it][32m2025-11-22 14:14:04.453[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0065: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.59it/s]
+[32m2025-11-22 14:14:44.536[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 11_epoch[0m
+[32m2025-11-22 14:14:44.644[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:14:44.645[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:09<00:00,  2.87it/s]
+[32m2025-11-22 14:14:53.702[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.03it/s]
+[32m2025-11-22 14:14:53.704[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 9.619855728278008e-05[0m
+[32m2025-11-22 14:14:53.706[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.22393798828125[0m
+[32m2025-11-22 14:14:53.708[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.005994155805987807[0m
+[32m2025-11-22 14:14:53.709[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 4.739314079284668[0m
+Epoch 11, LR=0.0015:  14%|█████████████▏                                                                                  | 11/80 [08:43<55:01, 47.84s/it][32m2025-11-22 14:14:53.719[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0055: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.64it/s]
+[32m2025-11-22 14:15:33.266[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 12_epoch[0m
+[32m2025-11-22 14:15:33.294[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:15:33.295[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.33it/s]
+[32m2025-11-22 14:15:41.116[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  6.28it/s]
+[32m2025-11-22 14:15:41.117[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 0.00010140492668142542[0m
+[32m2025-11-22 14:15:41.118[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 25.995033264160156[0m
+[32m2025-11-22 14:15:41.118[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.005305678619501682[0m
+[32m2025-11-22 14:15:41.119[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 5.270553112030029[0m
+Epoch 12, LR=0.0015:  15%|██████████████▍                                                                                 | 12/80 [09:31<54:04, 47.71s/it][32m2025-11-22 14:15:41.127[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0052: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.57it/s]
+[32m2025-11-22 14:16:21.509[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 13_epoch[0m
+[32m2025-11-22 14:16:21.553[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:16:21.554[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.13it/s]
+[32m2025-11-22 14:16:29.870[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.18it/s]
+[32m2025-11-22 14:16:29.872[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 9.651237689048194e-05[0m
+[32m2025-11-22 14:16:29.874[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.209789276123047[0m
+[32m2025-11-22 14:16:29.875[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.004849715283713662[0m
+[32m2025-11-22 14:16:29.878[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 5.6628522872924805[0m
+Epoch 13, LR=0.0015:  16%|███████████████▌                                                                                | 13/80 [10:19<53:38, 48.03s/it][32m2025-11-22 14:16:29.887[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0048: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.64it/s]
+[32m2025-11-22 14:17:09.481[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 14_epoch[0m
+[32m2025-11-22 14:17:09.538[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:17:09.538[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  2.91it/s]
+[32m2025-11-22 14:17:18.480[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.46it/s]
+[32m2025-11-22 14:17:18.481[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 0.00010105981290018043[0m
+[32m2025-11-22 14:17:18.482[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.009836196899414[0m
+[32m2025-11-22 14:17:18.482[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0044241804593744185[0m
+[32m2025-11-22 14:17:18.483[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 6.062926292419434[0m
+Epoch 14, LR=0.0015:  18%|████████████████▊                                                                               | 14/80 [11:08<53:01, 48.20s/it][32m2025-11-22 14:17:18.489[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0043: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.68it/s]
+[32m2025-11-22 14:17:57.676[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 15_epoch[0m
+[32m2025-11-22 14:17:57.781[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:17:57.782[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.08it/s]
+[32m2025-11-22 14:18:06.220[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.83it/s]
+[32m2025-11-22 14:18:06.221[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 9.490027206573778e-05[0m
+[32m2025-11-22 14:18:06.221[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.282947540283203[0m
+[32m2025-11-22 14:18:06.222[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.004073498922830017[0m
+[32m2025-11-22 14:18:06.223[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 6.423766136169434[0m
+Epoch 15, LR=0.0015:  19%|██████████████████                                                                              | 15/80 [11:56<52:04, 48.06s/it][32m2025-11-22 14:18:06.229[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0040: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.64it/s]
+[32m2025-11-22 14:18:45.800[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 16_epoch[0m
+[32m2025-11-22 14:18:45.903[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:18:45.904[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.15it/s]
+[32m2025-11-22 14:18:54.162[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.09it/s]
+[32m2025-11-22 14:18:54.163[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 9.91758158936416e-05[0m
+[32m2025-11-22 14:18:54.163[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.091564178466797[0m
+[32m2025-11-22 14:18:54.163[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0038177611109299157[0m
+[32m2025-11-22 14:18:54.164[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 6.705746173858643[0m
+Epoch 16, LR=0.0015:  20%|███████████████████▏                                                                            | 16/80 [12:44<51:13, 48.03s/it][32m2025-11-22 14:18:54.168[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0037: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.62it/s]
+[32m2025-11-22 14:19:33.981[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 17_epoch[0m
+[32m2025-11-22 14:19:34.050[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:19:34.051[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  2.90it/s]
+[32m2025-11-22 14:19:43.034[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.42it/s]
+[32m2025-11-22 14:19:43.034[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 9.579885087217778e-05[0m
+[32m2025-11-22 14:19:43.035[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.24201774597168[0m
+[32m2025-11-22 14:19:43.035[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.003644443000666797[0m
+[32m2025-11-22 14:19:43.036[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 6.9083709716796875[0m
+Epoch 17, LR=0.0015:  21%|████████████████████▍                                                                           | 17/80 [13:33<50:41, 48.28s/it][32m2025-11-22 14:19:43.040[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0041: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.66it/s]
+[32m2025-11-22 14:20:22.435[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 18_epoch[0m
+[32m2025-11-22 14:20:22.537[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:20:22.538[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  2.98it/s]
+[32m2025-11-22 14:20:31.279[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.51it/s]
+[32m2025-11-22 14:20:31.281[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 9.479756464805597e-05[0m
+[32m2025-11-22 14:20:31.282[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.287647247314453[0m
+[32m2025-11-22 14:20:31.283[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0034803249246369186[0m
+[32m2025-11-22 14:20:31.284[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 7.107982158660889[0m
+Epoch 18, LR=0.0015:  22%|█████████████████████▌                                                                          | 18/80 [14:21<49:52, 48.27s/it][32m2025-11-22 14:20:31.294[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0035: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.62it/s]
+[32m2025-11-22 14:21:11.066[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 19_epoch[0m
+[32m2025-11-22 14:21:11.136[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:21:11.137[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.15it/s]
+[32m2025-11-22 14:21:19.390[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.22it/s]
+[32m2025-11-22 14:21:19.391[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 9.341557457586392e-05[0m
+[32m2025-11-22 14:21:19.391[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.351428985595703[0m
+[32m2025-11-22 14:21:19.391[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0033267307399700466[0m
+[32m2025-11-22 14:21:19.392[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 7.305208206176758[0m
+Epoch 19, LR=0.0015:  24%|██████████████████████▊                                                                         | 19/80 [15:09<49:01, 48.22s/it][32m2025-11-22 14:21:19.396[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0033: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.60it/s]
+[32m2025-11-22 14:21:59.420[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 20_epoch[0m
+[32m2025-11-22 14:21:59.554[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:21:59.555[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.21it/s]
+[32m2025-11-22 14:22:07.657[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.43it/s]
+[32m2025-11-22 14:22:07.657[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 9.015553223434836e-05[0m
+[32m2025-11-22 14:22:07.658[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.50569725036621[0m
+[32m2025-11-22 14:22:07.658[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.003225896695557122[0m
+[32m2025-11-22 14:22:07.659[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 7.440791606903076[0m
+Epoch 20, LR=0.00075:  25%|███████████████████████▊                                                                       | 20/80 [15:57<48:14, 48.24s/it][32m2025-11-22 14:22:07.665[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0036: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.64it/s]
+[32m2025-11-22 14:22:47.246[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 21_epoch[0m
+[32m2025-11-22 14:22:47.336[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:22:47.336[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.19it/s]
+[32m2025-11-22 14:22:55.483[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.39it/s]
+[32m2025-11-22 14:22:55.485[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 9.493694233242422e-05[0m
+[32m2025-11-22 14:22:55.486[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.281269073486328[0m
+[32m2025-11-22 14:22:55.486[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0030778703960375143[0m
+[32m2025-11-22 14:22:55.489[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 7.645040512084961[0m
+Epoch 21, LR=0.00075:  26%|████████████████████████▉                                                                      | 21/80 [16:45<47:18, 48.12s/it][32m2025-11-22 14:22:55.505[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0030: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.56it/s]
+[32m2025-11-22 14:23:35.966[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 22_epoch[0m
+[32m2025-11-22 14:23:36.085[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:23:36.086[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.24it/s]
+[32m2025-11-22 14:23:44.103[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  6.82it/s]
+[32m2025-11-22 14:23:44.104[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 9.465373183887165e-05[0m
+[32m2025-11-22 14:23:44.105[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.29424285888672[0m
+[32m2025-11-22 14:23:44.105[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.003023843737677313[0m
+[32m2025-11-22 14:23:44.105[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 7.721745491027832[0m
+Epoch 22, LR=0.00075:  28%|██████████████████████████▏                                                                    | 22/80 [17:34<46:39, 48.26s/it][32m2025-11-22 14:23:44.109[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0037: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.58it/s]
+[32m2025-11-22 14:24:24.361[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 23_epoch[0m
+[32m2025-11-22 14:24:24.400[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:24:24.401[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  2.97it/s]
+[32m2025-11-22 14:24:33.158[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.20it/s]
+[32m2025-11-22 14:24:33.159[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 9.5542665803805e-05[0m
+[32m2025-11-22 14:24:33.159[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.253644943237305[0m
+[32m2025-11-22 14:24:33.159[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002910335100470827[0m
+[32m2025-11-22 14:24:33.160[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 7.887959957122803[0m
+Epoch 23, LR=0.00075:  29%|███████████████████████████▎                                                                   | 23/80 [18:23<46:04, 48.50s/it][32m2025-11-22 14:24:33.164[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0031: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.62it/s]
+[32m2025-11-22 14:25:12.938[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 24_epoch[0m
+[32m2025-11-22 14:25:13.030[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:25:13.030[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.00it/s]
+[32m2025-11-22 14:25:21.701[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.50it/s]
+[32m2025-11-22 14:25:21.702[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 9.360793774249032e-05[0m
+[32m2025-11-22 14:25:21.702[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.34249496459961[0m
+[32m2025-11-22 14:25:21.703[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002836106407742661[0m
+[32m2025-11-22 14:25:21.703[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 8.002449989318848[0m
+Epoch 24, LR=0.00075:  30%|████████████████████████████▌                                                                  | 24/80 [19:11<45:16, 48.51s/it][32m2025-11-22 14:25:21.708[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0037: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.55it/s]
+[32m2025-11-22 14:26:02.269[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 25_epoch[0m
+[32m2025-11-22 14:26:02.318[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:26:02.318[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  2.92it/s]
+[32m2025-11-22 14:26:11.223[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.86it/s]
+[32m2025-11-22 14:26:11.226[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 9.496982238488272e-05[0m
+[32m2025-11-22 14:26:11.227[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.27976417541504[0m
+[32m2025-11-22 14:26:11.229[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002778959970992918[0m
+[32m2025-11-22 14:26:11.230[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 8.09043025970459[0m
+Epoch 25, LR=0.00075:  31%|█████████████████████████████▋                                                                 | 25/80 [20:01<44:45, 48.82s/it][32m2025-11-22 14:26:11.244[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0029: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.60it/s]
+[32m2025-11-22 14:26:51.241[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 26_epoch[0m
+[32m2025-11-22 14:26:51.308[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:26:51.309[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:09<00:00,  2.72it/s]
+[32m2025-11-22 14:27:00.871[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:09<00:00,  5.22it/s]
+[32m2025-11-22 14:27:00.872[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.432976168338567e-05[0m
+[32m2025-11-22 14:27:00.873[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.795814514160156[0m
+[32m2025-11-22 14:27:00.873[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002744544198951469[0m
+[32m2025-11-22 14:27:00.873[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 8.146384239196777[0m
+Epoch 26, LR=0.00075:  32%|██████████████████████████████▉                                                                | 26/80 [20:50<44:09, 49.06s/it][32m2025-11-22 14:27:00.877[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0027: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.65it/s]
+[32m2025-11-22 14:27:40.306[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 27_epoch[0m
+[32m2025-11-22 14:27:40.436[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:27:40.442[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.07it/s]
+[32m2025-11-22 14:27:48.927[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.79it/s]
+[32m2025-11-22 14:27:48.928[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.377404167101934e-05[0m
+[32m2025-11-22 14:27:48.929[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.824527740478516[0m
+[32m2025-11-22 14:27:48.929[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002756068169569167[0m
+[32m2025-11-22 14:27:48.930[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 8.127671241760254[0m
+Epoch 27, LR=0.00075:  34%|████████████████████████████████                                                               | 27/80 [21:38<43:04, 48.76s/it][32m2025-11-22 14:27:48.935[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0028: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.60it/s]
+[32m2025-11-22 14:28:28.889[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 28_epoch[0m
+[32m2025-11-22 14:28:28.982[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:28:28.983[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  2.97it/s]
+[32m2025-11-22 14:28:37.739[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.97it/s]
+[32m2025-11-22 14:28:37.739[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.531161326503094e-05[0m
+[32m2025-11-22 14:28:37.740[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.74553680419922[0m
+[32m2025-11-22 14:28:37.740[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0026119303119440493[0m
+[32m2025-11-22 14:28:37.741[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 8.36424446105957[0m
+Epoch 28, LR=0.00075:  35%|█████████████████████████████████▎                                                             | 28/80 [22:27<42:16, 48.78s/it][32m2025-11-22 14:28:37.744[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0029: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.57it/s]
+[32m2025-11-22 14:29:18.071[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 29_epoch[0m
+[32m2025-11-22 14:29:18.249[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:29:18.250[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.28it/s]
+[32m2025-11-22 14:29:26.184[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  5.53it/s]
+[32m2025-11-22 14:29:26.185[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.752805073387348e-05[0m
+[32m2025-11-22 14:29:26.186[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.63414764404297[0m
+[32m2025-11-22 14:29:26.186[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0025299810983527163[0m
+[32m2025-11-22 14:29:26.187[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 8.502225875854492[0m
+Epoch 29, LR=0.00075:  36%|██████████████████████████████████▍                                                            | 29/80 [23:16<41:22, 48.68s/it][32m2025-11-22 14:29:26.192[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0026: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.55it/s]
+[32m2025-11-22 14:30:06.730[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 30_epoch[0m
+[32m2025-11-22 14:30:06.794[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:30:06.795[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.12it/s]
+[32m2025-11-22 14:30:15.135[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.34it/s]
+[32m2025-11-22 14:30:15.136[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.6768894107081e-05[0m
+[32m2025-11-22 14:30:15.137[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.671979904174805[0m
+[32m2025-11-22 14:30:15.137[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002462712671751013[0m
+[32m2025-11-22 14:30:15.152[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 8.620500564575195[0m
+Epoch 30, LR=0.00075:  38%|███████████████████████████████████▋                                                           | 30/80 [24:05<40:38, 48.77s/it][32m2025-11-22 14:30:15.173[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0027: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.57it/s]
+[32m2025-11-22 14:30:55.491[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 31_epoch[0m
+[32m2025-11-22 14:30:55.536[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:30:55.537[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.14it/s]
+[32m2025-11-22 14:31:03.817[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.04it/s]
+[32m2025-11-22 14:31:03.818[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.808285621433661e-05[0m
+[32m2025-11-22 14:31:03.819[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.606708526611328[0m
+[32m2025-11-22 14:31:03.819[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0024103711699493802[0m
+[32m2025-11-22 14:31:03.820[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 8.715456008911133[0m
+Epoch 31, LR=0.00075:  39%|████████████████████████████████████▊                                                          | 31/80 [24:53<39:47, 48.73s/it][32m2025-11-22 14:31:03.824[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0027: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.64it/s]
+[32m2025-11-22 14:31:43.380[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 32_epoch[0m
+[32m2025-11-22 14:31:43.492[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:31:43.493[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.02it/s]
+[32m2025-11-22 14:31:52.106[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.96it/s]
+[32m2025-11-22 14:31:52.106[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 9.356055698635128e-05[0m
+[32m2025-11-22 14:31:52.107[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.344694137573242[0m
+[32m2025-11-22 14:31:52.107[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002343931692079283[0m
+[32m2025-11-22 14:31:52.108[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 8.835163116455078[0m
+Epoch 32, LR=0.00075:  40%|██████████████████████████████████████                                                         | 32/80 [25:42<38:52, 48.60s/it][32m2025-11-22 14:31:52.111[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0024: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.61it/s]
+[32m2025-11-22 14:32:32.020[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 33_epoch[0m
+[32m2025-11-22 14:32:32.156[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:32:32.157[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.25it/s]
+[32m2025-11-22 14:32:40.155[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  7.48it/s]
+[32m2025-11-22 14:32:40.156[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.638467988930643e-05[0m
+[32m2025-11-22 14:32:40.157[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.691253662109375[0m
+[32m2025-11-22 14:32:40.157[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.00241369426322098[0m
+[32m2025-11-22 14:32:40.158[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 8.708457946777344[0m
+Epoch 33, LR=0.00075:  41%|███████████████████████████████████████▏                                                       | 33/80 [26:30<37:56, 48.44s/it][32m2025-11-22 14:32:40.163[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0026: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.64it/s]
+[32m2025-11-22 14:33:19.682[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 34_epoch[0m
+[32m2025-11-22 14:33:19.807[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:33:19.808[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.00it/s]
+[32m2025-11-22 14:33:28.470[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.50it/s]
+[32m2025-11-22 14:33:28.470[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.609080953093675e-05[0m
+[32m2025-11-22 14:33:28.471[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.242298126220703[0m
+[32m2025-11-22 14:33:28.471[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002431147024393655[0m
+[32m2025-11-22 14:33:28.472[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 8.678438186645508[0m
+Epoch 34, LR=0.00075:  42%|████████████████████████████████████████▍                                                      | 34/80 [27:18<37:06, 48.40s/it][32m2025-11-22 14:33:28.476[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0025: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.58it/s]
+[32m2025-11-22 14:34:08.698[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 35_epoch[0m
+[32m2025-11-22 14:34:08.732[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:34:08.733[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.40it/s]
+[32m2025-11-22 14:34:16.392[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  6.75it/s]
+[32m2025-11-22 14:34:16.396[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.17232618059139e-05[0m
+[32m2025-11-22 14:34:16.398[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.932161331176758[0m
+[32m2025-11-22 14:34:16.399[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0023137939323742804[0m
+[32m2025-11-22 14:34:16.402[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 8.89397144317627[0m
+Epoch 35, LR=0.00075:  44%|█████████████████████████████████████████▌                                                     | 35/80 [28:06<36:11, 48.26s/it][32m2025-11-22 14:34:16.416[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0024: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.62it/s]
+[32m2025-11-22 14:34:56.185[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 36_epoch[0m
+[32m2025-11-22 14:34:56.306[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:34:56.306[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.42it/s]
+[32m2025-11-22 14:35:03.912[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  7.30it/s]
+[32m2025-11-22 14:35:03.912[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.243976481026039e-05[0m
+[32m2025-11-22 14:35:03.913[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.894254684448242[0m
+[32m2025-11-22 14:35:03.913[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0022676786264547934[0m
+[32m2025-11-22 14:35:03.914[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 8.980470657348633[0m
+Epoch 36, LR=0.00075:  45%|██████████████████████████████████████████▊                                                    | 36/80 [28:53<35:13, 48.03s/it][32m2025-11-22 14:35:03.918[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0020: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.53it/s]
+[32m2025-11-22 14:35:44.671[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 37_epoch[0m
+[32m2025-11-22 14:35:44.755[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:35:44.756[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.11it/s]
+[32m2025-11-22 14:35:53.131[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.04it/s]
+[32m2025-11-22 14:35:53.131[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.244586206274107e-05[0m
+[32m2025-11-22 14:35:53.132[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.893932342529297[0m
+[32m2025-11-22 14:35:53.132[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002220528791300379[0m
+[32m2025-11-22 14:35:53.133[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.073461532592773[0m
+Epoch 37, LR=0.00075:  46%|███████████████████████████████████████████▉                                                   | 37/80 [29:43<34:40, 48.39s/it][32m2025-11-22 14:35:53.137[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0022: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.59it/s]
+[32m2025-11-22 14:36:33.267[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 38_epoch[0m
+[32m2025-11-22 14:36:33.375[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:36:33.376[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.24it/s]
+[32m2025-11-22 14:36:41.418[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  5.76it/s]
+[32m2025-11-22 14:36:41.419[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.57875801067656e-05[0m
+[32m2025-11-22 14:36:41.420[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.721378326416016[0m
+[32m2025-11-22 14:36:41.421[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0021698268202061835[0m
+[32m2025-11-22 14:36:41.421[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.175125122070312[0m
+Epoch 38, LR=0.00075:  48%|█████████████████████████████████████████████▏                                                 | 38/80 [30:31<33:51, 48.36s/it][32m2025-11-22 14:36:41.426[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0024: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.63it/s]
+[32m2025-11-22 14:37:21.138[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 39_epoch[0m
+[32m2025-11-22 14:37:21.151[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:37:21.151[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.51it/s]
+[32m2025-11-22 14:37:28.574[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  7.72it/s]
+[32m2025-11-22 14:37:28.576[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.038039959501475e-05[0m
+[32m2025-11-22 14:37:28.577[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.004117965698242[0m
+[32m2025-11-22 14:37:28.579[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002225262471116506[0m
+[32m2025-11-22 14:37:28.580[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.063016891479492[0m
+Epoch 39, LR=0.00075:  49%|██████████████████████████████████████████████▎                                                | 39/80 [31:18<32:48, 48.00s/it][32m2025-11-22 14:37:28.590[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0020: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.58it/s]
+[32m2025-11-22 14:38:08.795[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 40_epoch[0m
+[32m2025-11-22 14:38:08.824[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:38:08.825[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.14it/s]
+[32m2025-11-22 14:38:17.124[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.11it/s]
+[32m2025-11-22 14:38:17.126[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.603481208207086e-05[0m
+[32m2025-11-22 14:38:17.127[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.245494842529297[0m
+[32m2025-11-22 14:38:17.128[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002177852214887165[0m
+[32m2025-11-22 14:38:17.129[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.158912658691406[0m
+Epoch 40, LR=0.000375:  50%|███████████████████████████████████████████████                                               | 40/80 [32:07<32:06, 48.16s/it][32m2025-11-22 14:38:17.138[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0021: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.63it/s]
+[32m2025-11-22 14:38:56.840[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 41_epoch[0m
+[32m2025-11-22 14:38:56.946[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:38:56.946[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.12it/s]
+[32m2025-11-22 14:39:05.282[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.09it/s]
+[32m2025-11-22 14:39:05.283[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 9.094775305129588e-05[0m
+[32m2025-11-22 14:39:05.283[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.467700958251953[0m
+[32m2025-11-22 14:39:05.283[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0020480432520763804[0m
+[32m2025-11-22 14:39:05.284[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.424044609069824[0m
+Epoch 41, LR=0.000375:  51%|████████████████████████████████████████████████▏                                             | 41/80 [32:55<31:18, 48.16s/it][32m2025-11-22 14:39:05.288[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0022: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.62it/s]
+[32m2025-11-22 14:39:45.122[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 42_epoch[0m
+[32m2025-11-22 14:39:45.212[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:39:45.213[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.39it/s]
+[32m2025-11-22 14:39:52.892[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  7.19it/s]
+[32m2025-11-22 14:39:52.892[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.690579346112478e-05[0m
+[32m2025-11-22 14:39:52.893[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.19603157043457[0m
+[32m2025-11-22 14:39:52.893[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0021584828411085675[0m
+[32m2025-11-22 14:39:52.894[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.198354721069336[0m
+Epoch 42, LR=0.000375:  52%|█████████████████████████████████████████████████▎                                            | 42/80 [33:42<30:23, 48.00s/it][32m2025-11-22 14:39:52.899[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0021: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.56it/s]
+[32m2025-11-22 14:40:33.399[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 43_epoch[0m
+[32m2025-11-22 14:40:33.532[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:40:33.535[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.18it/s]
+[32m2025-11-22 14:40:41.709[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.44it/s]
+[32m2025-11-22 14:40:41.709[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.213887485908344e-05[0m
+[32m2025-11-22 14:40:41.710[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.91013526916504[0m
+[32m2025-11-22 14:40:41.710[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002092904836619989[0m
+[32m2025-11-22 14:40:41.711[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.329012870788574[0m
+Epoch 43, LR=0.000375:  54%|██████████████████████████████████████████████████▌                                           | 43/80 [34:31<29:44, 48.24s/it][32m2025-11-22 14:40:41.715[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0021: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.64it/s]
+[32m2025-11-22 14:41:21.310[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 44_epoch[0m
+[32m2025-11-22 14:41:21.378[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:41:21.379[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  2.97it/s]
+[32m2025-11-22 14:41:30.124[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.61it/s]
+[32m2025-11-22 14:41:30.124[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.974967901156141e-05[0m
+[32m2025-11-22 14:41:30.125[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.038331985473633[0m
+[32m2025-11-22 14:41:30.125[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002074197216783292[0m
+[32m2025-11-22 14:41:30.125[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.372562408447266[0m
+Epoch 44, LR=0.000375:  55%|███████████████████████████████████████████████████▋                                          | 44/80 [35:20<28:58, 48.29s/it][32m2025-11-22 14:41:30.130[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0021: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.61it/s]
+[32m2025-11-22 14:42:10.077[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 45_epoch[0m
+[32m2025-11-22 14:42:10.136[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:42:10.137[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.03it/s]
+[32m2025-11-22 14:42:18.713[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.64it/s]
+[32m2025-11-22 14:42:18.713[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.589322922285646e-05[0m
+[32m2025-11-22 14:42:18.714[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.253589630126953[0m
+[32m2025-11-22 14:42:18.714[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0021160688304987093[0m
+[32m2025-11-22 14:42:18.715[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.284331321716309[0m
+Epoch 45, LR=0.000375:  56%|████████████████████████████████████████████████████▉                                         | 45/80 [36:08<28:13, 48.38s/it][32m2025-11-22 14:42:18.720[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0020: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.67it/s]
+[32m2025-11-22 14:42:58.006[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 46_epoch[0m
+[32m2025-11-22 14:42:58.119[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:42:58.120[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.20it/s]
+[32m2025-11-22 14:43:06.253[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.39it/s]
+[32m2025-11-22 14:43:06.253[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.061964819297337e-05[0m
+[32m2025-11-22 14:43:06.254[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.9912109375[0m
+[32m2025-11-22 14:43:06.254[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002062303788709239[0m
+[32m2025-11-22 14:43:06.255[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.396023750305176[0m
+Epoch 46, LR=0.000375:  57%|██████████████████████████████████████████████████████                                        | 46/80 [36:56<27:16, 48.13s/it][32m2025-11-22 14:43:06.260[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0022: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.61it/s]
+[32m2025-11-22 14:43:46.158[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 47_epoch[0m
+[32m2025-11-22 14:43:46.269[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:43:46.270[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.29it/s]
+[32m2025-11-22 14:43:54.170[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  8.04it/s]
+[32m2025-11-22 14:43:54.171[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.847516098991036e-05[0m
+[32m2025-11-22 14:43:54.172[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.108299255371094[0m
+[32m2025-11-22 14:43:54.172[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0020553737189262533[0m
+[32m2025-11-22 14:43:54.173[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.411871910095215[0m
+Epoch 47, LR=0.000375:  59%|███████████████████████████████████████████████████████▏                                      | 47/80 [37:44<26:26, 48.07s/it][32m2025-11-22 14:43:54.178[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0020: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.63it/s]
+[32m2025-11-22 14:44:33.893[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 48_epoch[0m
+[32m2025-11-22 14:44:33.936[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:44:33.936[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.07it/s]
+[32m2025-11-22 14:44:42.413[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.62it/s]
+[32m2025-11-22 14:44:42.414[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.857344462536275e-05[0m
+[32m2025-11-22 14:44:42.416[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.102863311767578[0m
+[32m2025-11-22 14:44:42.417[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002029115208782829[0m
+[32m2025-11-22 14:44:42.418[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.468029975891113[0m
+Epoch 48, LR=0.000375:  60%|████████████████████████████████████████████████████████▍                                     | 48/80 [38:32<25:39, 48.12s/it][32m2025-11-22 14:44:42.425[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0021: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.67it/s]
+[32m2025-11-22 14:45:21.673[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 49_epoch[0m
+[32m2025-11-22 14:45:21.784[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:45:21.785[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.12it/s]
+[32m2025-11-22 14:45:30.117[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.63it/s]
+[32m2025-11-22 14:45:30.117[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.939822059527684e-05[0m
+[32m2025-11-22 14:45:30.118[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.057514190673828[0m
+[32m2025-11-22 14:45:30.118[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0020480568637140095[0m
+[32m2025-11-22 14:45:30.118[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.425493240356445[0m
+Epoch 49, LR=0.000375:  61%|█████████████████████████████████████████████████████████▌                                    | 49/80 [39:20<24:47, 47.99s/it][32m2025-11-22 14:45:30.122[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0019: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.62it/s]
+[32m2025-11-22 14:46:09.927[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 50_epoch[0m
+[32m2025-11-22 14:46:10.057[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:46:10.058[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.44it/s]
+[32m2025-11-22 14:46:17.615[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  8.60it/s]
+[32m2025-11-22 14:46:17.616[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.932639122233153e-05[0m
+[32m2025-11-22 14:46:17.616[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.061443328857422[0m
+[32m2025-11-22 14:46:17.617[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.00200440300306162[0m
+[32m2025-11-22 14:46:17.617[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.521430969238281[0m
+Epoch 50, LR=0.000375:  62%|██████████████████████████████████████████████████████████▊                                   | 50/80 [40:07<23:55, 47.85s/it][32m2025-11-22 14:46:17.623[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0016: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.55it/s]
+[32m2025-11-22 14:46:58.172[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 51_epoch[0m
+[32m2025-11-22 14:46:58.258[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:46:58.259[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.21it/s]
+[32m2025-11-22 14:47:06.382[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.53it/s]
+[32m2025-11-22 14:47:06.383[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.861847552703694e-05[0m
+[32m2025-11-22 14:47:06.384[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.100374221801758[0m
+[32m2025-11-22 14:47:06.390[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.002008846410227796[0m
+[32m2025-11-22 14:47:06.392[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.510565757751465[0m
+Epoch 51, LR=0.000375:  64%|███████████████████████████████████████████████████████████▉                                  | 51/80 [40:56<23:15, 48.12s/it][32m2025-11-22 14:47:06.405[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0023: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.61it/s]
+[32m2025-11-22 14:47:46.328[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 52_epoch[0m
+[32m2025-11-22 14:47:46.442[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:47:46.443[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.38it/s]
+[32m2025-11-22 14:47:54.149[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  6.55it/s]
+[32m2025-11-22 14:47:54.150[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.927993563218758e-05[0m
+[32m2025-11-22 14:47:54.150[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.063987731933594[0m
+[32m2025-11-22 14:47:54.150[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.001979785734035361[0m
+[32m2025-11-22 14:47:54.151[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.573156356811523[0m
+Epoch 52, LR=0.000375:  65%|█████████████████████████████████████████████████████████████                                 | 52/80 [41:44<22:24, 48.01s/it][32m2025-11-22 14:47:54.155[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0018: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.63it/s]
+[32m2025-11-22 14:48:33.834[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 53_epoch[0m
+[32m2025-11-22 14:48:33.955[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:48:33.955[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.26it/s]
+[32m2025-11-22 14:48:41.928[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  7.33it/s]
+[32m2025-11-22 14:48:41.929[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.941782762197993e-05[0m
+[32m2025-11-22 14:48:41.929[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.056440353393555[0m
+[32m2025-11-22 14:48:41.930[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0019518219722578158[0m
+[32m2025-11-22 14:48:41.930[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.63640308380127[0m
+Epoch 53, LR=0.000375:  66%|██████████████████████████████████████████████████████████████▎                               | 53/80 [42:31<21:34, 47.94s/it][32m2025-11-22 14:48:41.935[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0022: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.67it/s]
+[32m2025-11-22 14:49:21.177[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 54_epoch[0m
+[32m2025-11-22 14:49:21.273[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:49:21.273[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.09it/s]
+[32m2025-11-22 14:49:29.694[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  8.16it/s]
+[32m2025-11-22 14:49:29.695[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.577307016821578e-05[0m
+[32m2025-11-22 14:49:29.695[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.722110748291016[0m
+[32m2025-11-22 14:49:29.696[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0019055513951640863[0m
+[32m2025-11-22 14:49:29.696[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.740461349487305[0m
+Epoch 54, LR=0.000375:  68%|███████████████████████████████████████████████████████████████▍                              | 54/80 [43:19<20:45, 47.89s/it][32m2025-11-22 14:49:29.701[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0019: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.62it/s]
+[32m2025-11-22 14:50:09.491[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 55_epoch[0m
+[32m2025-11-22 14:50:09.605[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:50:09.605[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.14it/s]
+[32m2025-11-22 14:50:17.902[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.21it/s]
+[32m2025-11-22 14:50:17.903[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.435613840173643e-05[0m
+[32m2025-11-22 14:50:17.904[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.342451095581055[0m
+[32m2025-11-22 14:50:17.904[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0020054558005470494[0m
+[32m2025-11-22 14:50:17.905[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.518674850463867[0m
+Epoch 55, LR=0.000375:  69%|████████████████████████████████████████████████████████████████▋                             | 55/80 [44:07<19:59, 47.99s/it][32m2025-11-22 14:50:17.910[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0017: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.56it/s]
+[32m2025-11-22 14:50:58.397[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 56_epoch[0m
+[32m2025-11-22 14:50:58.467[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:50:58.470[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.13it/s]
+[32m2025-11-22 14:51:06.777[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.63it/s]
+[32m2025-11-22 14:51:06.780[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.904461801025228e-05[0m
+[32m2025-11-22 14:51:06.782[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.07689666748047[0m
+[32m2025-11-22 14:51:06.783[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.001957983463608588[0m
+[32m2025-11-22 14:51:06.784[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.619280815124512[0m
+Epoch 56, LR=0.000375:  70%|█████████████████████████████████████████████████████████████████▊                            | 56/80 [44:56<19:18, 48.26s/it][32m2025-11-22 14:51:06.800[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0022: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.59it/s]
+[32m2025-11-22 14:51:46.966[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 57_epoch[0m
+[32m2025-11-22 14:51:47.013[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:51:47.013[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.21it/s]
+[32m2025-11-22 14:51:55.112[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.96it/s]
+[32m2025-11-22 14:51:55.113[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 8.11742874457895e-05[0m
+[32m2025-11-22 14:51:55.114[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 26.961435317993164[0m
+[32m2025-11-22 14:51:55.114[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0019107955561664242[0m
+[32m2025-11-22 14:51:55.114[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.72714614868164[0m
+Epoch 57, LR=0.000375:  71%|██████████████████████████████████████████████████████████████████▉                           | 57/80 [45:45<18:30, 48.28s/it][32m2025-11-22 14:51:55.120[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0023: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.57it/s]
+[32m2025-11-22 14:52:35.412[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 58_epoch[0m
+[32m2025-11-22 14:52:35.515[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:52:35.516[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.37it/s]
+[32m2025-11-22 14:52:43.235[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  6.94it/s]
+[32m2025-11-22 14:52:43.235[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.712140611077372e-05[0m
+[32m2025-11-22 14:52:43.236[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.183870315551758[0m
+[32m2025-11-22 14:52:43.237[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.001946466074934086[0m
+[32m2025-11-22 14:52:43.238[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.647638320922852[0m
+Epoch 58, LR=0.000375:  72%|████████████████████████████████████████████████████████████████████▏                         | 58/80 [46:33<17:41, 48.23s/it][32m2025-11-22 14:52:43.246[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0021: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.60it/s]
+[32m2025-11-22 14:53:23.223[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 59_epoch[0m
+[32m2025-11-22 14:53:23.320[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:53:23.323[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  2.96it/s]
+[32m2025-11-22 14:53:32.110[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  5.92it/s]
+[32m2025-11-22 14:53:32.111[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.11666059662373e-05[0m
+[32m2025-11-22 14:53:32.111[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.53285789489746[0m
+[32m2025-11-22 14:53:32.112[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0019908151678884258[0m
+[32m2025-11-22 14:53:32.112[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.554076194763184[0m
+Epoch 59, LR=0.000375:  74%|█████████████████████████████████████████████████████████████████████▎                        | 59/80 [47:22<16:56, 48.42s/it][32m2025-11-22 14:53:32.117[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0017: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.56it/s]
+[32m2025-11-22 14:54:12.568[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 60_epoch[0m
+[32m2025-11-22 14:54:12.683[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:54:12.686[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  2.98it/s]
+[32m2025-11-22 14:54:21.409[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.03it/s]
+[32m2025-11-22 14:54:21.411[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.43457071971184e-05[0m
+[32m2025-11-22 14:54:21.413[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.343061447143555[0m
+[32m2025-11-22 14:54:21.414[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.001917048661897962[0m
+[32m2025-11-22 14:54:21.415[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.716362953186035[0m
+Epoch 60, LR=0.0001875:  75%|█████████████████████████████████████████████████████████████████████▊                       | 60/80 [48:11<16:13, 48.69s/it][32m2025-11-22 14:54:21.427[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0017: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.58it/s]
+[32m2025-11-22 14:55:01.629[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 61_epoch[0m
+[32m2025-11-22 14:55:01.703[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:55:01.703[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  2.97it/s]
+[32m2025-11-22 14:55:10.459[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  5.80it/s]
+[32m2025-11-22 14:55:10.460[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.376895938740255e-05[0m
+[32m2025-11-22 14:55:10.461[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.37688446044922[0m
+[32m2025-11-22 14:55:10.461[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0019243372819171501[0m
+[32m2025-11-22 14:55:10.462[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.698582649230957[0m
+Epoch 61, LR=0.0001875:  76%|██████████████████████████████████████████████████████████████████████▉                      | 61/80 [49:00<15:27, 48.79s/it][32m2025-11-22 14:55:10.467[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0017: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.62it/s]
+[32m2025-11-22 14:55:50.201[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 62_epoch[0m
+[32m2025-11-22 14:55:50.310[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:55:50.311[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  2.91it/s]
+[32m2025-11-22 14:55:59.254[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.28it/s]
+[32m2025-11-22 14:55:59.258[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.333006215048954e-05[0m
+[32m2025-11-22 14:55:59.259[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.402799606323242[0m
+[32m2025-11-22 14:55:59.261[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0019239483204168768[0m
+[32m2025-11-22 14:55:59.262[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.698894500732422[0m
+Epoch 62, LR=0.0001875:  78%|████████████████████████████████████████████████████████████████████████                     | 62/80 [49:49<14:38, 48.80s/it][32m2025-11-22 14:55:59.275[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0017: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.54it/s]
+[32m2025-11-22 14:56:39.968[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 63_epoch[0m
+[32m2025-11-22 14:56:40.070[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:56:40.071[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.49it/s]
+[32m2025-11-22 14:56:47.529[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  6.55it/s]
+[32m2025-11-22 14:56:47.530[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.368356595039726e-05[0m
+[32m2025-11-22 14:56:47.531[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.381914138793945[0m
+[32m2025-11-22 14:56:47.531[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.001909269221449414[0m
+[32m2025-11-22 14:56:47.532[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.732599258422852[0m
+Epoch 63, LR=0.0001875:  79%|█████████████████████████████████████████████████████████████████████████▏                   | 63/80 [50:37<13:46, 48.64s/it][32m2025-11-22 14:56:47.539[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0018: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.56it/s]
+[32m2025-11-22 14:57:28.048[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 64_epoch[0m
+[32m2025-11-22 14:57:28.126[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:57:28.128[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.31it/s]
+[32m2025-11-22 14:57:35.977[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  7.19it/s]
+[32m2025-11-22 14:57:35.978[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.543050742242485e-05[0m
+[32m2025-11-22 14:57:35.978[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.2801513671875[0m
+[32m2025-11-22 14:57:35.978[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0018907266695840429[0m
+[32m2025-11-22 14:57:35.979[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.775287628173828[0m
+Epoch 64, LR=0.0001875:  80%|██████████████████████████████████████████████████████████████████████████▍                  | 64/80 [51:25<12:57, 48.58s/it][32m2025-11-22 14:57:35.983[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0020: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.55it/s]
+[32m2025-11-22 14:58:16.553[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 65_epoch[0m
+[32m2025-11-22 14:58:16.655[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:58:16.656[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.32it/s]
+[32m2025-11-22 14:58:24.502[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  7.94it/s]
+[32m2025-11-22 14:58:24.503[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.555646852079708e-05[0m
+[32m2025-11-22 14:58:24.503[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.272905349731445[0m
+[32m2025-11-22 14:58:24.504[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0018923145432311755[0m
+[32m2025-11-22 14:58:24.504[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.772238731384277[0m
+Epoch 65, LR=0.0001875:  81%|███████████████████████████████████████████████████████████████████████████▌                 | 65/80 [52:14<12:08, 48.56s/it][32m2025-11-22 14:58:24.511[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0017: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.63it/s]
+[32m2025-11-22 14:59:04.229[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 66_epoch[0m
+[32m2025-11-22 14:59:04.368[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:59:04.368[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.07it/s]
+[32m2025-11-22 14:59:12.832[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.37it/s]
+[32m2025-11-22 14:59:12.834[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.59948530825428e-05[0m
+[32m2025-11-22 14:59:12.835[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.247779846191406[0m
+[32m2025-11-22 14:59:12.836[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0018980831373482943[0m
+[32m2025-11-22 14:59:12.837[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.756636619567871[0m
+Epoch 66, LR=0.0001875:  82%|████████████████████████████████████████████████████████████████████████████▋                | 66/80 [53:02<11:18, 48.49s/it][32m2025-11-22 14:59:12.842[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0015: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.64it/s]
+[32m2025-11-22 14:59:52.367[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 67_epoch[0m
+[32m2025-11-22 14:59:52.433[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 14:59:52.434[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.34it/s]
+[32m2025-11-22 15:00:00.227[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  6.87it/s]
+[32m2025-11-22 15:00:00.227[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.833831282019113e-05[0m
+[32m2025-11-22 15:00:00.228[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.115877151489258[0m
+[32m2025-11-22 15:00:00.228[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0018671098245809285[0m
+[32m2025-11-22 15:00:00.228[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.830658912658691[0m
+Epoch 67, LR=0.0001875:  84%|█████████████████████████████████████████████████████████████████████████████▉               | 67/80 [53:50<10:26, 48.16s/it][32m2025-11-22 15:00:00.232[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0018: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.63it/s]
+[32m2025-11-22 15:00:39.858[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 68_epoch[0m
+[32m2025-11-22 15:00:39.946[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 15:00:39.947[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.12it/s]
+[32m2025-11-22 15:00:48.282[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.31it/s]
+[32m2025-11-22 15:00:48.284[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.659977759780864e-05[0m
+[32m2025-11-22 15:00:48.284[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.213346481323242[0m
+[32m2025-11-22 15:00:48.285[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0018728735964172161[0m
+[32m2025-11-22 15:00:48.285[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.817485809326172[0m
+Epoch 68, LR=0.0001875:  85%|███████████████████████████████████████████████████████████████████████████████              | 68/80 [54:38<09:37, 48.13s/it][32m2025-11-22 15:00:48.297[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0019: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.61it/s]
+[32m2025-11-22 15:01:28.220[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 69_epoch[0m
+[32m2025-11-22 15:01:28.303[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 15:01:28.304[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.10it/s]
+[32m2025-11-22 15:01:36.703[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.89it/s]
+[32m2025-11-22 15:01:36.703[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.664783110018246e-05[0m
+[32m2025-11-22 15:01:36.704[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.210620880126953[0m
+[32m2025-11-22 15:01:36.704[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0018646656804216595[0m
+[32m2025-11-22 15:01:36.705[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.838929176330566[0m
+Epoch 69, LR=0.0001875:  86%|████████████████████████████████████████████████████████████████████████████████▏            | 69/80 [55:26<08:50, 48.22s/it][32m2025-11-22 15:01:36.710[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0020: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.66it/s]
+[32m2025-11-22 15:02:16.009[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 70_epoch[0m
+[32m2025-11-22 15:02:16.086[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 15:02:16.087[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.07it/s]
+[32m2025-11-22 15:02:24.550[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.19it/s]
+[32m2025-11-22 15:02:24.550[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.41015246603638e-05[0m
+[32m2025-11-22 15:02:24.551[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.357349395751953[0m
+[32m2025-11-22 15:02:24.551[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0018887181694690997[0m
+[32m2025-11-22 15:02:24.551[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.780631065368652[0m
+Epoch 70, LR=0.0001875:  88%|█████████████████████████████████████████████████████████████████████████████████▍           | 70/80 [56:14<08:01, 48.11s/it][32m2025-11-22 15:02:24.556[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0021: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.56it/s]
+[32m2025-11-22 15:03:04.984[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 71_epoch[0m
+[32m2025-11-22 15:03:05.065[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 15:03:05.066[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.14it/s]
+[32m2025-11-22 15:03:13.343[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.92it/s]
+[32m2025-11-22 15:03:13.344[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.432315760524943e-05[0m
+[32m2025-11-22 15:03:13.345[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.344379425048828[0m
+[32m2025-11-22 15:03:13.345[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.001876737156775422[0m
+[32m2025-11-22 15:03:13.345[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.80928897857666[0m
+Epoch 71, LR=0.0001875:  89%|██████████████████████████████████████████████████████████████████████████████████▌          | 71/80 [57:03<07:14, 48.31s/it][32m2025-11-22 15:03:13.351[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0017: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.63it/s]
+[32m2025-11-22 15:03:53.078[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 72_epoch[0m
+[32m2025-11-22 15:03:53.188[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 15:03:53.188[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.17it/s]
+[32m2025-11-22 15:04:01.393[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.63it/s]
+[32m2025-11-22 15:04:01.394[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.304758960694577e-05[0m
+[32m2025-11-22 15:04:01.395[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.41956329345703[0m
+[32m2025-11-22 15:04:01.395[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0018769994942256464[0m
+[32m2025-11-22 15:04:01.396[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.807840347290039[0m
+Epoch 72, LR=0.0001875:  90%|███████████████████████████████████████████████████████████████████████████████████▋         | 72/80 [57:51<06:25, 48.23s/it][32m2025-11-22 15:04:01.402[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0017: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.57it/s]
+[32m2025-11-22 15:04:41.768[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 73_epoch[0m
+[32m2025-11-22 15:04:41.862[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 15:04:41.863[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  2.93it/s]
+[32m2025-11-22 15:04:50.750[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.81it/s]
+[32m2025-11-22 15:04:50.750[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.582957186968997e-05[0m
+[32m2025-11-22 15:04:50.751[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.257234573364258[0m
+[32m2025-11-22 15:04:50.751[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0018768729731583824[0m
+[32m2025-11-22 15:04:50.752[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.808823585510254[0m
+Epoch 73, LR=0.0001875:  91%|████████████████████████████████████████████████████████████████████████████████████▊        | 73/80 [58:40<05:39, 48.57s/it][32m2025-11-22 15:04:50.757[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0014: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.62it/s]
+[32m2025-11-22 15:05:30.491[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 74_epoch[0m
+[32m2025-11-22 15:05:30.594[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 15:05:30.595[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.19it/s]
+[32m2025-11-22 15:05:38.767[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.46it/s]
+[32m2025-11-22 15:05:38.768[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.22292679711245e-05[0m
+[32m2025-11-22 15:05:38.772[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.468488693237305[0m
+[32m2025-11-22 15:05:38.773[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0018816233361856295[0m
+[32m2025-11-22 15:05:38.774[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.799688339233398[0m
+Epoch 74, LR=0.0001875:  92%|██████████████████████████████████████████████████████████████████████████████████████       | 74/80 [59:28<04:50, 48.41s/it][32m2025-11-22 15:05:38.779[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0016: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.59it/s]
+[32m2025-11-22 15:06:18.946[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 75_epoch[0m
+[32m2025-11-22 15:06:19.031[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 15:06:19.035[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.11it/s]
+[32m2025-11-22 15:06:27.399[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  7.55it/s]
+[32m2025-11-22 15:06:27.402[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.68919344409369e-05[0m
+[32m2025-11-22 15:06:27.404[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.196815490722656[0m
+[32m2025-11-22 15:06:27.405[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.001844530508746035[0m
+[32m2025-11-22 15:06:27.405[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.883635520935059[0m
+Epoch 75, LR=0.0001875:  94%|█████████████████████████████████████████████████████████████████████████████████████▎     | 75/80 [1:00:17<04:02, 48.47s/it][32m2025-11-22 15:06:27.418[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0020: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.62it/s]
+[32m2025-11-22 15:07:07.256[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 76_epoch[0m
+[32m2025-11-22 15:07:07.340[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 15:07:07.341[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  2.92it/s]
+[32m2025-11-22 15:07:16.237[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.95it/s]
+[32m2025-11-22 15:07:16.238[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.587936852360144e-05[0m
+[32m2025-11-22 15:07:16.239[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.254383087158203[0m
+[32m2025-11-22 15:07:16.239[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0018430938003942943[0m
+[32m2025-11-22 15:07:16.240[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.887557029724121[0m
+Epoch 76, LR=0.0001875:  95%|██████████████████████████████████████████████████████████████████████████████████████▍    | 76/80 [1:01:06<03:14, 48.58s/it][32m2025-11-22 15:07:16.245[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0018: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.57it/s]
+[32m2025-11-22 15:07:56.546[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 77_epoch[0m
+[32m2025-11-22 15:07:56.620[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 15:07:56.620[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.14it/s]
+[32m2025-11-22 15:08:04.902[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.45it/s]
+[32m2025-11-22 15:08:04.902[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.082513184286654e-05[0m
+[32m2025-11-22 15:08:04.903[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.553749084472656[0m
+[32m2025-11-22 15:08:04.903[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.001882244694010856[0m
+[32m2025-11-22 15:08:04.903[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.795918464660645[0m
+Epoch 77, LR=0.0001875:  96%|███████████████████████████████████████████████████████████████████████████████████████▌   | 77/80 [1:01:54<02:25, 48.61s/it][32m2025-11-22 15:08:04.907[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0013: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.53it/s]
+[32m2025-11-22 15:08:45.707[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 78_epoch[0m
+[32m2025-11-22 15:08:45.818[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 15:08:45.818[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:07<00:00,  3.36it/s]
+[32m2025-11-22 15:08:53.551[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  7.28it/s]
+[32m2025-11-22 15:08:53.552[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.109621219569817e-05[0m
+[32m2025-11-22 15:08:53.553[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.53715705871582[0m
+[32m2025-11-22 15:08:53.553[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0018809440393502323[0m
+[32m2025-11-22 15:08:53.553[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.800848007202148[0m
+Epoch 78, LR=0.0001875:  98%|████████████████████████████████████████████████████████████████████████████████████████▋  | 78/80 [1:02:43<01:37, 48.62s/it][32m2025-11-22 15:08:53.557[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0019: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:39<00:00,  3.61it/s]
+[32m2025-11-22 15:09:33.475[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 79_epoch[0m
+[32m2025-11-22 15:09:33.631[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 15:09:33.631[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.24it/s]
+[32m2025-11-22 15:09:41.655[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:07<00:00,  6.79it/s]
+[32m2025-11-22 15:09:41.655[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.015126175247133e-05[0m
+[32m2025-11-22 15:09:41.656[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.595266342163086[0m
+[32m2025-11-22 15:09:41.656[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0018791782741363232[0m
+[32m2025-11-22 15:09:41.657[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.804320335388184[0m
+Epoch 79, LR=0.0001875:  99%|█████████████████████████████████████████████████████████████████████████████████████████▊ | 79/80 [1:03:31<00:48, 48.46s/it][32m2025-11-22 15:09:41.661[0m | [34m[1mDEBUG   [0m | [36msolver[0m:[36mtrain[0m:[36m279[0m - [34m[1mtrain mode[0m
+[140/144], carrier_loss: 0.0001, msg_loss: 0.0016: 100%|████████████████████████████████████████████████████████████████| 144/144 [00:40<00:00,  3.56it/s]
+[32m2025-11-22 15:10:22.103[0m | [1mINFO    [0m | [36msolver[0m:[36msave_models[0m:[36m64[0m - [1msaving model to: /home/yyx/hideandspeak-log-272/ckpt
+
+=============================================================
+
+self.ckpt_dir: /home/yyx/hideandspeak-log-272/ckpt, gl_hparams.load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 80_epoch[0m
+[32m2025-11-22 15:10:22.189[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m349[0m - [1mphase: validation[0m
+[32m2025-11-22 15:10:22.189[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m351[0m - [1mstart validation...[0m
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 26/26 [00:08<00:00,  3.13it/s]
+[32m2025-11-22 15:10:30.511[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m373[0m - [1mfinished validation![0m26 [00:08<00:00,  6.34it/s]
+[32m2025-11-22 15:10:30.514[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m374[0m - [1mcarrier loss: 7.501742388390434e-05[0m
+[32m2025-11-22 15:10:30.517[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m375[0m - [1mcarrier SnR: 27.303998947143555[0m
+[32m2025-11-22 15:10:30.518[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m376[0m - [1mmessage loss: 0.0018315519958447951[0m
+[32m2025-11-22 15:10:30.519[0m | [1mINFO    [0m | [36msolver[0m:[36mtest[0m:[36m377[0m - [1mmessage SnR: 9.915688514709473[0m
+Epoch 79, LR=0.0001875: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 80/80 [1:04:20<00:00, 48.26s/it]
+[32m2025-11-22 15:10:30.530[0m | [1mINFO    [0m | [36msolver[0m:[36mtrain[0m:[36m335[0m - [1mfinished training![0m
+[32m2025-11-22 15:10:30.534[0m | [1mINFO    [0m | [36m__main__[0m:[36mrun_all[0m:[36m406[0m - [1mTraining complete!lr:0.0015[0m
+[32m2025-11-22 15:10:30.551[0m | [1mINFO    [0m | [36m__main__[0m:[36mrun_all[0m:[36m409[0m - [1mTraining complete![0m
+[32m2025-11-22 15:10:30.552[0m | [1mINFO    [0m | [36m__main__[0m:[36mrun_all[0m:[36m410[0m - [1mlr: 0.0015, batch_size: 32, mode: train, single: True, lambda_carrier: 9.0, lambda_msg: 1.0, freeze_num: 1, model_type: normal, lr: 0.00151[0m
+[32m2025-11-22 15:10:30.608[0m | [34m[1mDEBUG   [0m | [36mmodel[0m:[36mget_models[0m:[36m186[0m - [34m[1mFullEncoder(
+  (encoder_first): Encoder(
+    (main): Sequential(
+      (0): GatedBlock(
+        (conv): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (1): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (2): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+    )
+  )
+  (encoder_second): CarrierDecoder(
+    (main): Sequential(
+      (0): GatedBlock(
+        (conv): Conv2d(65, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(65, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (1): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (2): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (3): GatedBlock(
+        (conv): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+        (gate): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+  )
+)[0m
+[32m2025-11-22 15:10:30.612[0m | [34m[1mDEBUG   [0m | [36mmodel[0m:[36mget_models[0m:[36m187[0m - [34m[1mMsgDecoder(
+  (main): Sequential(
+    (0): GatedBlock(
+      (conv): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (1): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): GatedBlock(
+      (conv): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+)[0m
+
+ablate load_ckpt: /home/yyx/hideandspeak-log-272/ckpt
+
+ablate ckpt_path: /home/yyx/hideandspeak-log-272/ckpt/80_epoch
+[32m2025-11-22 15:10:30.643[0m | [1mINFO    [0m | [36mmodel[0m:[36mload_models[0m:[36m153[0m - [1mloader models[0m
+
+Baseline  msg_loss=0.0197, car_loss=0.0001, msg_SNR=3.15dB, car_SNR=24.68dB
+[1/64] Masked container train #0: Δ msg_loss=0.0036, Δ car_loss=0.0092, Δ msg_SNR=0.74dB, Δ car_SNR=18.26dB
+[2/64] Masked container train #1: Δ msg_loss=0.0027, Δ car_loss=0.0065, Δ msg_SNR=0.56dB, Δ car_SNR=16.77dB
+[3/64] Masked container train #2: Δ msg_loss=0.0025, Δ car_loss=0.0050, Δ msg_SNR=0.52dB, Δ car_SNR=15.67dB
+[4/64] Masked container train #3: Δ msg_loss=0.0017, Δ car_loss=0.0041, Δ msg_SNR=0.36dB, Δ car_SNR=14.78dB
+[5/64] Masked container train #4: Δ msg_loss=0.0014, Δ car_loss=0.0026, Δ msg_SNR=0.30dB, Δ car_SNR=12.73dB
+[6/64] Masked container train #5: Δ msg_loss=0.0010, Δ car_loss=0.0016, Δ msg_SNR=0.22dB, Δ car_SNR=10.74dB
+[7/64] Masked container train #6: Δ msg_loss=0.0005, Δ car_loss=0.0010, Δ msg_SNR=0.12dB, Δ car_SNR=8.31dB
+[8/64] Masked container train #7: Δ msg_loss=0.0004, Δ car_loss=0.0006, Δ msg_SNR=0.09dB, Δ car_SNR=6.79dB
+[9/64] Masked container train #8: Δ msg_loss=0.0016, Δ car_loss=0.0021, Δ msg_SNR=0.34dB, Δ car_SNR=12.05dB
+[10/64] Masked container train #9: Δ msg_loss=0.0012, Δ car_loss=0.0013, Δ msg_SNR=0.26dB, Δ car_SNR=10.14dB
+[11/64] Masked container train #10: Δ msg_loss=0.0011, Δ car_loss=0.0010, Δ msg_SNR=0.24dB, Δ car_SNR=9.09dB
+[12/64] Masked container train #11: Δ msg_loss=0.0009, Δ car_loss=0.0010, Δ msg_SNR=0.19dB, Δ car_SNR=8.89dB
+[13/64] Masked container train #12: Δ msg_loss=0.0007, Δ car_loss=0.0005, Δ msg_SNR=0.16dB, Δ car_SNR=6.47dB
+[14/64] Masked container train #13: Δ msg_loss=0.0005, Δ car_loss=0.0003, Δ msg_SNR=0.11dB, Δ car_SNR=4.98dB
+[15/64] Masked container train #14: Δ msg_loss=0.0003, Δ car_loss=0.0002, Δ msg_SNR=0.06dB, Δ car_SNR=3.17dB
+[16/64] Masked container train #15: Δ msg_loss=0.0002, Δ car_loss=0.0001, Δ msg_SNR=0.05dB, Δ car_SNR=2.62dB
+[17/64] Masked container train #16: Δ msg_loss=0.0004, Δ car_loss=0.0003, Δ msg_SNR=0.10dB, Δ car_SNR=5.29dB
+[18/64] Masked container train #17: Δ msg_loss=0.0003, Δ car_loss=0.0002, Δ msg_SNR=0.08dB, Δ car_SNR=4.35dB
+[19/64] Masked container train #18: Δ msg_loss=0.0003, Δ car_loss=0.0002, Δ msg_SNR=0.07dB, Δ car_SNR=3.83dB
+[20/64] Masked container train #19: Δ msg_loss=0.0003, Δ car_loss=0.0001, Δ msg_SNR=0.06dB, Δ car_SNR=3.01dB
+[21/64] Masked container train #20: Δ msg_loss=0.0002, Δ car_loss=0.0001, Δ msg_SNR=0.04dB, Δ car_SNR=2.10dB
+[22/64] Masked container train #21: Δ msg_loss=0.0001, Δ car_loss=0.0001, Δ msg_SNR=0.02dB, Δ car_SNR=1.35dB
+[23/64] Masked container train #22: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.02dB, Δ car_SNR=0.91dB
+[24/64] Masked container train #23: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.73dB
+[25/64] Masked container train #24: Δ msg_loss=0.0002, Δ car_loss=0.0002, Δ msg_SNR=0.05dB, Δ car_SNR=3.65dB
+[26/64] Masked container train #25: Δ msg_loss=0.0002, Δ car_loss=0.0001, Δ msg_SNR=0.05dB, Δ car_SNR=2.83dB
+[27/64] Masked container train #26: Δ msg_loss=0.0002, Δ car_loss=0.0001, Δ msg_SNR=0.04dB, Δ car_SNR=2.36dB
+[28/64] Masked container train #27: Δ msg_loss=0.0002, Δ car_loss=0.0001, Δ msg_SNR=0.04dB, Δ car_SNR=2.30dB
+[29/64] Masked container train #28: Δ msg_loss=0.0001, Δ car_loss=0.0001, Δ msg_SNR=0.03dB, Δ car_SNR=1.47dB
+[30/64] Masked container train #29: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.65dB
+[31/64] Masked container train #30: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.66dB
+[32/64] Masked container train #31: Δ msg_loss=0.0000, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.33dB
+[33/64] Masked container train #32: Δ msg_loss=0.0002, Δ car_loss=0.0001, Δ msg_SNR=0.04dB, Δ car_SNR=2.87dB
+[34/64] Masked container train #33: Δ msg_loss=0.0002, Δ car_loss=0.0001, Δ msg_SNR=0.04dB, Δ car_SNR=2.45dB
+[35/64] Masked container train #34: Δ msg_loss=0.0002, Δ car_loss=0.0001, Δ msg_SNR=0.04dB, Δ car_SNR=2.24dB
+[36/64] Masked container train #35: Δ msg_loss=0.0002, Δ car_loss=0.0001, Δ msg_SNR=0.03dB, Δ car_SNR=1.97dB
+[37/64] Masked container train #36: Δ msg_loss=0.0001, Δ car_loss=0.0001, Δ msg_SNR=0.03dB, Δ car_SNR=1.39dB
+[38/64] Masked container train #37: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.58dB
+[39/64] Masked container train #38: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.02dB, Δ car_SNR=0.85dB
+[40/64] Masked container train #39: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.48dB
+[41/64] Masked container train #40: Δ msg_loss=0.0001, Δ car_loss=0.0001, Δ msg_SNR=0.03dB, Δ car_SNR=1.60dB
+[42/64] Masked container train #41: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.03dB, Δ car_SNR=1.30dB
+[43/64] Masked container train #42: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.02dB, Δ car_SNR=1.27dB
+[44/64] Masked container train #43: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.02dB, Δ car_SNR=1.05dB
+[45/64] Masked container train #44: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.02dB, Δ car_SNR=0.99dB
+[46/64] Masked container train #45: Δ msg_loss=0.0000, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.43dB
+[47/64] Masked container train #46: Δ msg_loss=0.0000, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.50dB
+[48/64] Masked container train #47: Δ msg_loss=0.0000, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.29dB
+[49/64] Masked container train #48: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.02dB, Δ car_SNR=1.04dB
+[50/64] Masked container train #49: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.02dB, Δ car_SNR=0.71dB
+[51/64] Masked container train #50: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.02dB, Δ car_SNR=0.77dB
+[52/64] Masked container train #51: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.64dB
+[53/64] Masked container train #52: Δ msg_loss=0.0001, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.51dB
+[54/64] Masked container train #53: Δ msg_loss=0.0000, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.27dB
+[55/64] Masked container train #54: Δ msg_loss=0.0000, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.26dB
+[56/64] Masked container train #55: Δ msg_loss=0.0000, Δ car_loss=0.0000, Δ msg_SNR=0.00dB, Δ car_SNR=0.15dB
+[57/64] Masked container train #56: Δ msg_loss=0.0000, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=1.04dB
+[58/64] Masked container train #57: Δ msg_loss=0.0000, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.68dB
+[59/64] Masked container train #58: Δ msg_loss=0.0000, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.83dB
+[60/64] Masked container train #59: Δ msg_loss=0.0000, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.56dB
+[61/64] Masked container train #60: Δ msg_loss=0.0000, Δ car_loss=0.0000, Δ msg_SNR=0.01dB, Δ car_SNR=0.67dB
+[62/64] Masked container train #61: Δ msg_loss=0.0000, Δ car_loss=0.0000, Δ msg_SNR=0.00dB, Δ car_SNR=0.23dB
+[63/64] Masked container train #62: Δ msg_loss=0.0000, Δ car_loss=0.0000, Δ msg_SNR=0.00dB, Δ car_SNR=0.30dB
+[64/64] Masked container train #63: Δ msg_loss=0.0000, Δ car_loss=0.0000, Δ msg_SNR=0.00dB, Δ car_SNR=0.15dB
+Traceback (most recent call last):
+  File "main.py", line 427, in <module>
+    main()
+  File "main.py", line 421, in main
+    ablate(gl_hparams, rows=gl_hparams.rows, cols=gl_hparams.cols, mode=gl_hparams.mode,
+  File "/home/yyx/anaconda3/envs/HideAndSpeak/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/yyx/hideandspeak/unihide/ablate_stft.py", line 179, in ablate
+    heatmap(drop_msg_loss, f'Δ msg_loss ({target}, {mode})', f'heat_drop_msg_loss_{target}_{mode}.png')
+  File "/home/yyx/hideandspeak/unihide/ablate_stft.py", line 168, in heatmap
+    H = arr.reshape(1, cols)
+ValueError: cannot reshape array of size 64 into shape (1,8)
+Traceback (most recent call last):
+  File "main.py", line 427, in <module>
+    main()
+  File "main.py", line 421, in main
+    ablate(gl_hparams, rows=gl_hparams.rows, cols=gl_hparams.cols, mode=gl_hparams.mode,
+  File "/home/yyx/anaconda3/envs/HideAndSpeak/lib/python3.8/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/yyx/hideandspeak/unihide/ablate_stft.py", line 179, in ablate
+    heatmap(drop_msg_loss, f'Δ msg_loss ({target}, {mode})', f'heat_drop_msg_loss_{target}_{mode}.png')
+  File "/home/yyx/hideandspeak/unihide/ablate_stft.py", line 168, in heatmap
+    H = arr.reshape(1, cols)
+ValueError: cannot reshape array of size 64 into shape (1,8)
+[32m2025-11-22 15:17:03.301[0m | [1mINFO    [0m | [36mexperiment[0m:[36msave[0m:[36m178[0m - [1msaving experiment[0m

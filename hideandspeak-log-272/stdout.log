@@ -1,0 +1,940 @@
+2025-11-22 14:06:10.001 | DEBUG    | model:get_models:186 - FullEncoder(
+  (encoder_first): Encoder(
+    (main): Sequential(
+      (0): GatedBlock(
+        (conv): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (1): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (2): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+    )
+  )
+  (encoder_second): CarrierDecoder(
+    (main): Sequential(
+      (0): GatedBlock(
+        (conv): Conv2d(65, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(65, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (1): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (2): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (3): GatedBlock(
+        (conv): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+        (gate): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+  )
+)
+2025-11-22 14:06:10.002 | DEBUG    | model:get_models:187 - MsgDecoder(
+  (main): Sequential(
+    (0): GatedBlock(
+      (conv): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (1): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): GatedBlock(
+      (conv): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+)
+2025-11-22 14:06:10.003 | INFO     | __main__:run:349 - hparams.mode:train
+2025-11-22 14:06:10.019 | INFO     | __main__:run:363 - loaded train (144), val (26)
+2025-11-22 14:06:10.021 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:06:49.495 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 1_epoch
+2025-11-22 14:06:49.541 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:06:49.542 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:06:57.842 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:06:57.843 | INFO     | solver:test:374 - carrier loss: 1.5771629687850902e-05
+2025-11-22 14:06:57.844 | INFO     | solver:test:375 - carrier SnR: 34.07685470581055
+2025-11-22 14:06:57.844 | INFO     | solver:test:376 - message loss: 0.014831138058350636
+2025-11-22 14:06:57.845 | INFO     | solver:test:377 - message SnR: 0.7977338433265686
+2025-11-22 14:06:57.851 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:07:37.055 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 2_epoch
+2025-11-22 14:07:37.072 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:07:37.073 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:07:44.968 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:07:44.969 | INFO     | solver:test:374 - carrier loss: 1.1372292647138238e-05
+2025-11-22 14:07:44.969 | INFO     | solver:test:375 - carrier SnR: 35.49713897705078
+2025-11-22 14:07:44.970 | INFO     | solver:test:376 - message loss: 0.014762900590610046
+2025-11-22 14:07:44.970 | INFO     | solver:test:377 - message SnR: 0.817789614200592
+2025-11-22 14:07:44.975 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:08:24.661 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 3_epoch
+2025-11-22 14:08:24.682 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:08:24.682 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:08:32.831 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:08:32.832 | INFO     | solver:test:374 - carrier loss: 5.74621799387387e-06
+2025-11-22 14:08:32.832 | INFO     | solver:test:375 - carrier SnR: 38.46179962158203
+2025-11-22 14:08:32.832 | INFO     | solver:test:376 - message loss: 0.0162168348637911
+2025-11-22 14:08:32.833 | INFO     | solver:test:377 - message SnR: 0.4096962809562683
+2025-11-22 14:08:32.838 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:09:11.883 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 4_epoch
+2025-11-22 14:09:11.987 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:09:11.988 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:09:19.865 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:09:19.866 | INFO     | solver:test:374 - carrier loss: 1.7677114888451447e-06
+2025-11-22 14:09:19.866 | INFO     | solver:test:375 - carrier SnR: 43.581504821777344
+2025-11-22 14:09:19.866 | INFO     | solver:test:376 - message loss: 0.015051671769469976
+2025-11-22 14:09:19.867 | INFO     | solver:test:377 - message SnR: 0.7336737513542175
+2025-11-22 14:09:19.870 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:09:59.223 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 5_epoch
+2025-11-22 14:09:59.267 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:09:59.268 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:10:07.706 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:10:07.706 | INFO     | solver:test:374 - carrier loss: 1.796341166482307e-05
+2025-11-22 14:10:07.707 | INFO     | solver:test:375 - carrier SnR: 33.51173400878906
+2025-11-22 14:10:07.707 | INFO     | solver:test:376 - message loss: 0.014420906404176584
+2025-11-22 14:10:07.707 | INFO     | solver:test:377 - message SnR: 0.9195438623428345
+2025-11-22 14:10:07.712 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:10:47.052 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 6_epoch
+2025-11-22 14:10:47.139 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:10:47.140 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:10:55.826 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:10:55.827 | INFO     | solver:test:374 - carrier loss: 2.051832094506468e-05
+2025-11-22 14:10:55.827 | INFO     | solver:test:375 - carrier SnR: 32.9342041015625
+2025-11-22 14:10:55.828 | INFO     | solver:test:376 - message loss: 0.014319320674985647
+2025-11-22 14:10:55.828 | INFO     | solver:test:377 - message SnR: 0.9502442479133606
+2025-11-22 14:10:55.832 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:11:35.403 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 7_epoch
+2025-11-22 14:11:35.496 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:11:35.496 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:11:43.893 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:11:43.894 | INFO     | solver:test:374 - carrier loss: 1.6684313357892768e-06
+2025-11-22 14:11:43.895 | INFO     | solver:test:375 - carrier SnR: 43.83253860473633
+2025-11-22 14:11:43.895 | INFO     | solver:test:376 - message loss: 0.015338687512737054
+2025-11-22 14:11:43.896 | INFO     | solver:test:377 - message SnR: 0.6515657901763916
+2025-11-22 14:11:43.900 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:12:22.575 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 8_epoch
+2025-11-22 14:12:22.680 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:12:22.681 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:12:30.185 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:12:30.185 | INFO     | solver:test:374 - carrier loss: 2.281653360114433e-05
+2025-11-22 14:12:30.186 | INFO     | solver:test:375 - carrier SnR: 32.47312545776367
+2025-11-22 14:12:30.186 | INFO     | solver:test:376 - message loss: 0.014831440809827585
+2025-11-22 14:12:30.186 | INFO     | solver:test:377 - message SnR: 0.7976618409156799
+2025-11-22 14:12:30.191 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:13:09.443 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 9_epoch
+2025-11-22 14:13:09.526 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:13:09.534 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:13:17.510 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:13:17.510 | INFO     | solver:test:374 - carrier loss: 8.521569151735793e-05
+2025-11-22 14:13:17.511 | INFO     | solver:test:375 - carrier SnR: 26.750425338745117
+2025-11-22 14:13:17.511 | INFO     | solver:test:376 - message loss: 0.008033716764587622
+2025-11-22 14:13:17.511 | INFO     | solver:test:377 - message SnR: 3.464001178741455
+2025-11-22 14:13:17.515 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:13:57.001 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 10_epoch
+2025-11-22 14:13:57.067 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:13:57.068 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:14:04.446 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:14:04.446 | INFO     | solver:test:374 - carrier loss: 0.0001096119079962731
+2025-11-22 14:14:04.447 | INFO     | solver:test:375 - carrier SnR: 25.657045364379883
+2025-11-22 14:14:04.448 | INFO     | solver:test:376 - message loss: 0.006678654471985423
+2025-11-22 14:14:04.448 | INFO     | solver:test:377 - message SnR: 4.267375946044922
+2025-11-22 14:14:04.453 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:14:44.536 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 11_epoch
+2025-11-22 14:14:44.644 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:14:44.645 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:14:53.702 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:14:53.704 | INFO     | solver:test:374 - carrier loss: 9.619855728278008e-05
+2025-11-22 14:14:53.706 | INFO     | solver:test:375 - carrier SnR: 26.22393798828125
+2025-11-22 14:14:53.708 | INFO     | solver:test:376 - message loss: 0.005994155805987807
+2025-11-22 14:14:53.709 | INFO     | solver:test:377 - message SnR: 4.739314079284668
+2025-11-22 14:14:53.719 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:15:33.266 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 12_epoch
+2025-11-22 14:15:33.294 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:15:33.295 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:15:41.116 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:15:41.117 | INFO     | solver:test:374 - carrier loss: 0.00010140492668142542
+2025-11-22 14:15:41.118 | INFO     | solver:test:375 - carrier SnR: 25.995033264160156
+2025-11-22 14:15:41.118 | INFO     | solver:test:376 - message loss: 0.005305678619501682
+2025-11-22 14:15:41.119 | INFO     | solver:test:377 - message SnR: 5.270553112030029
+2025-11-22 14:15:41.127 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:16:21.509 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 13_epoch
+2025-11-22 14:16:21.553 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:16:21.554 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:16:29.870 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:16:29.872 | INFO     | solver:test:374 - carrier loss: 9.651237689048194e-05
+2025-11-22 14:16:29.874 | INFO     | solver:test:375 - carrier SnR: 26.209789276123047
+2025-11-22 14:16:29.875 | INFO     | solver:test:376 - message loss: 0.004849715283713662
+2025-11-22 14:16:29.878 | INFO     | solver:test:377 - message SnR: 5.6628522872924805
+2025-11-22 14:16:29.887 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:17:09.481 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 14_epoch
+2025-11-22 14:17:09.538 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:17:09.538 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:17:18.480 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:17:18.481 | INFO     | solver:test:374 - carrier loss: 0.00010105981290018043
+2025-11-22 14:17:18.482 | INFO     | solver:test:375 - carrier SnR: 26.009836196899414
+2025-11-22 14:17:18.482 | INFO     | solver:test:376 - message loss: 0.0044241804593744185
+2025-11-22 14:17:18.483 | INFO     | solver:test:377 - message SnR: 6.062926292419434
+2025-11-22 14:17:18.489 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:17:57.676 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 15_epoch
+2025-11-22 14:17:57.781 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:17:57.782 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:18:06.220 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:18:06.221 | INFO     | solver:test:374 - carrier loss: 9.490027206573778e-05
+2025-11-22 14:18:06.221 | INFO     | solver:test:375 - carrier SnR: 26.282947540283203
+2025-11-22 14:18:06.222 | INFO     | solver:test:376 - message loss: 0.004073498922830017
+2025-11-22 14:18:06.223 | INFO     | solver:test:377 - message SnR: 6.423766136169434
+2025-11-22 14:18:06.229 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:18:45.800 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 16_epoch
+2025-11-22 14:18:45.903 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:18:45.904 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:18:54.162 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:18:54.163 | INFO     | solver:test:374 - carrier loss: 9.91758158936416e-05
+2025-11-22 14:18:54.163 | INFO     | solver:test:375 - carrier SnR: 26.091564178466797
+2025-11-22 14:18:54.163 | INFO     | solver:test:376 - message loss: 0.0038177611109299157
+2025-11-22 14:18:54.164 | INFO     | solver:test:377 - message SnR: 6.705746173858643
+2025-11-22 14:18:54.168 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:19:33.981 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 17_epoch
+2025-11-22 14:19:34.050 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:19:34.051 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:19:43.034 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:19:43.034 | INFO     | solver:test:374 - carrier loss: 9.579885087217778e-05
+2025-11-22 14:19:43.035 | INFO     | solver:test:375 - carrier SnR: 26.24201774597168
+2025-11-22 14:19:43.035 | INFO     | solver:test:376 - message loss: 0.003644443000666797
+2025-11-22 14:19:43.036 | INFO     | solver:test:377 - message SnR: 6.9083709716796875
+2025-11-22 14:19:43.040 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:20:22.435 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 18_epoch
+2025-11-22 14:20:22.537 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:20:22.538 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:20:31.279 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:20:31.281 | INFO     | solver:test:374 - carrier loss: 9.479756464805597e-05
+2025-11-22 14:20:31.282 | INFO     | solver:test:375 - carrier SnR: 26.287647247314453
+2025-11-22 14:20:31.283 | INFO     | solver:test:376 - message loss: 0.0034803249246369186
+2025-11-22 14:20:31.284 | INFO     | solver:test:377 - message SnR: 7.107982158660889
+2025-11-22 14:20:31.294 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:21:11.066 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 19_epoch
+2025-11-22 14:21:11.136 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:21:11.137 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:21:19.390 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:21:19.391 | INFO     | solver:test:374 - carrier loss: 9.341557457586392e-05
+2025-11-22 14:21:19.391 | INFO     | solver:test:375 - carrier SnR: 26.351428985595703
+2025-11-22 14:21:19.391 | INFO     | solver:test:376 - message loss: 0.0033267307399700466
+2025-11-22 14:21:19.392 | INFO     | solver:test:377 - message SnR: 7.305208206176758
+2025-11-22 14:21:19.396 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:21:59.420 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 20_epoch
+2025-11-22 14:21:59.554 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:21:59.555 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:22:07.657 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:22:07.657 | INFO     | solver:test:374 - carrier loss: 9.015553223434836e-05
+2025-11-22 14:22:07.658 | INFO     | solver:test:375 - carrier SnR: 26.50569725036621
+2025-11-22 14:22:07.658 | INFO     | solver:test:376 - message loss: 0.003225896695557122
+2025-11-22 14:22:07.659 | INFO     | solver:test:377 - message SnR: 7.440791606903076
+2025-11-22 14:22:07.665 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:22:47.246 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 21_epoch
+2025-11-22 14:22:47.336 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:22:47.336 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:22:55.483 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:22:55.485 | INFO     | solver:test:374 - carrier loss: 9.493694233242422e-05
+2025-11-22 14:22:55.486 | INFO     | solver:test:375 - carrier SnR: 26.281269073486328
+2025-11-22 14:22:55.486 | INFO     | solver:test:376 - message loss: 0.0030778703960375143
+2025-11-22 14:22:55.489 | INFO     | solver:test:377 - message SnR: 7.645040512084961
+2025-11-22 14:22:55.505 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:23:35.966 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 22_epoch
+2025-11-22 14:23:36.085 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:23:36.086 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:23:44.103 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:23:44.104 | INFO     | solver:test:374 - carrier loss: 9.465373183887165e-05
+2025-11-22 14:23:44.105 | INFO     | solver:test:375 - carrier SnR: 26.29424285888672
+2025-11-22 14:23:44.105 | INFO     | solver:test:376 - message loss: 0.003023843737677313
+2025-11-22 14:23:44.105 | INFO     | solver:test:377 - message SnR: 7.721745491027832
+2025-11-22 14:23:44.109 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:24:24.361 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 23_epoch
+2025-11-22 14:24:24.400 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:24:24.401 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:24:33.158 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:24:33.159 | INFO     | solver:test:374 - carrier loss: 9.5542665803805e-05
+2025-11-22 14:24:33.159 | INFO     | solver:test:375 - carrier SnR: 26.253644943237305
+2025-11-22 14:24:33.159 | INFO     | solver:test:376 - message loss: 0.002910335100470827
+2025-11-22 14:24:33.160 | INFO     | solver:test:377 - message SnR: 7.887959957122803
+2025-11-22 14:24:33.164 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:25:12.938 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 24_epoch
+2025-11-22 14:25:13.030 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:25:13.030 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:25:21.701 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:25:21.702 | INFO     | solver:test:374 - carrier loss: 9.360793774249032e-05
+2025-11-22 14:25:21.702 | INFO     | solver:test:375 - carrier SnR: 26.34249496459961
+2025-11-22 14:25:21.703 | INFO     | solver:test:376 - message loss: 0.002836106407742661
+2025-11-22 14:25:21.703 | INFO     | solver:test:377 - message SnR: 8.002449989318848
+2025-11-22 14:25:21.708 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:26:02.269 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 25_epoch
+2025-11-22 14:26:02.318 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:26:02.318 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:26:11.223 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:26:11.226 | INFO     | solver:test:374 - carrier loss: 9.496982238488272e-05
+2025-11-22 14:26:11.227 | INFO     | solver:test:375 - carrier SnR: 26.27976417541504
+2025-11-22 14:26:11.229 | INFO     | solver:test:376 - message loss: 0.002778959970992918
+2025-11-22 14:26:11.230 | INFO     | solver:test:377 - message SnR: 8.09043025970459
+2025-11-22 14:26:11.244 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:26:51.241 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 26_epoch
+2025-11-22 14:26:51.308 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:26:51.309 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:27:00.871 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:27:00.872 | INFO     | solver:test:374 - carrier loss: 8.432976168338567e-05
+2025-11-22 14:27:00.873 | INFO     | solver:test:375 - carrier SnR: 26.795814514160156
+2025-11-22 14:27:00.873 | INFO     | solver:test:376 - message loss: 0.002744544198951469
+2025-11-22 14:27:00.873 | INFO     | solver:test:377 - message SnR: 8.146384239196777
+2025-11-22 14:27:00.877 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:27:40.306 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 27_epoch
+2025-11-22 14:27:40.436 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:27:40.442 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:27:48.927 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:27:48.928 | INFO     | solver:test:374 - carrier loss: 8.377404167101934e-05
+2025-11-22 14:27:48.929 | INFO     | solver:test:375 - carrier SnR: 26.824527740478516
+2025-11-22 14:27:48.929 | INFO     | solver:test:376 - message loss: 0.002756068169569167
+2025-11-22 14:27:48.930 | INFO     | solver:test:377 - message SnR: 8.127671241760254
+2025-11-22 14:27:48.935 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:28:28.889 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 28_epoch
+2025-11-22 14:28:28.982 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:28:28.983 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:28:37.739 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:28:37.739 | INFO     | solver:test:374 - carrier loss: 8.531161326503094e-05
+2025-11-22 14:28:37.740 | INFO     | solver:test:375 - carrier SnR: 26.74553680419922
+2025-11-22 14:28:37.740 | INFO     | solver:test:376 - message loss: 0.0026119303119440493
+2025-11-22 14:28:37.741 | INFO     | solver:test:377 - message SnR: 8.36424446105957
+2025-11-22 14:28:37.744 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:29:18.071 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 29_epoch
+2025-11-22 14:29:18.249 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:29:18.250 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:29:26.184 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:29:26.185 | INFO     | solver:test:374 - carrier loss: 8.752805073387348e-05
+2025-11-22 14:29:26.186 | INFO     | solver:test:375 - carrier SnR: 26.63414764404297
+2025-11-22 14:29:26.186 | INFO     | solver:test:376 - message loss: 0.0025299810983527163
+2025-11-22 14:29:26.187 | INFO     | solver:test:377 - message SnR: 8.502225875854492
+2025-11-22 14:29:26.192 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:30:06.730 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 30_epoch
+2025-11-22 14:30:06.794 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:30:06.795 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:30:15.135 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:30:15.136 | INFO     | solver:test:374 - carrier loss: 8.6768894107081e-05
+2025-11-22 14:30:15.137 | INFO     | solver:test:375 - carrier SnR: 26.671979904174805
+2025-11-22 14:30:15.137 | INFO     | solver:test:376 - message loss: 0.002462712671751013
+2025-11-22 14:30:15.152 | INFO     | solver:test:377 - message SnR: 8.620500564575195
+2025-11-22 14:30:15.173 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:30:55.491 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 31_epoch
+2025-11-22 14:30:55.536 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:30:55.537 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:31:03.817 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:31:03.818 | INFO     | solver:test:374 - carrier loss: 8.808285621433661e-05
+2025-11-22 14:31:03.819 | INFO     | solver:test:375 - carrier SnR: 26.606708526611328
+2025-11-22 14:31:03.819 | INFO     | solver:test:376 - message loss: 0.0024103711699493802
+2025-11-22 14:31:03.820 | INFO     | solver:test:377 - message SnR: 8.715456008911133
+2025-11-22 14:31:03.824 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:31:43.380 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 32_epoch
+2025-11-22 14:31:43.492 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:31:43.493 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:31:52.106 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:31:52.106 | INFO     | solver:test:374 - carrier loss: 9.356055698635128e-05
+2025-11-22 14:31:52.107 | INFO     | solver:test:375 - carrier SnR: 26.344694137573242
+2025-11-22 14:31:52.107 | INFO     | solver:test:376 - message loss: 0.002343931692079283
+2025-11-22 14:31:52.108 | INFO     | solver:test:377 - message SnR: 8.835163116455078
+2025-11-22 14:31:52.111 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:32:32.020 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 33_epoch
+2025-11-22 14:32:32.156 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:32:32.157 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:32:40.155 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:32:40.156 | INFO     | solver:test:374 - carrier loss: 8.638467988930643e-05
+2025-11-22 14:32:40.157 | INFO     | solver:test:375 - carrier SnR: 26.691253662109375
+2025-11-22 14:32:40.157 | INFO     | solver:test:376 - message loss: 0.00241369426322098
+2025-11-22 14:32:40.158 | INFO     | solver:test:377 - message SnR: 8.708457946777344
+2025-11-22 14:32:40.163 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:33:19.682 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 34_epoch
+2025-11-22 14:33:19.807 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:33:19.808 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:33:28.470 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:33:28.470 | INFO     | solver:test:374 - carrier loss: 7.609080953093675e-05
+2025-11-22 14:33:28.471 | INFO     | solver:test:375 - carrier SnR: 27.242298126220703
+2025-11-22 14:33:28.471 | INFO     | solver:test:376 - message loss: 0.002431147024393655
+2025-11-22 14:33:28.472 | INFO     | solver:test:377 - message SnR: 8.678438186645508
+2025-11-22 14:33:28.476 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:34:08.698 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 35_epoch
+2025-11-22 14:34:08.732 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:34:08.733 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:34:16.392 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:34:16.396 | INFO     | solver:test:374 - carrier loss: 8.17232618059139e-05
+2025-11-22 14:34:16.398 | INFO     | solver:test:375 - carrier SnR: 26.932161331176758
+2025-11-22 14:34:16.399 | INFO     | solver:test:376 - message loss: 0.0023137939323742804
+2025-11-22 14:34:16.402 | INFO     | solver:test:377 - message SnR: 8.89397144317627
+2025-11-22 14:34:16.416 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:34:56.185 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 36_epoch
+2025-11-22 14:34:56.306 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:34:56.306 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:35:03.912 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:35:03.912 | INFO     | solver:test:374 - carrier loss: 8.243976481026039e-05
+2025-11-22 14:35:03.913 | INFO     | solver:test:375 - carrier SnR: 26.894254684448242
+2025-11-22 14:35:03.913 | INFO     | solver:test:376 - message loss: 0.0022676786264547934
+2025-11-22 14:35:03.914 | INFO     | solver:test:377 - message SnR: 8.980470657348633
+2025-11-22 14:35:03.918 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:35:44.671 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 37_epoch
+2025-11-22 14:35:44.755 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:35:44.756 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:35:53.131 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:35:53.131 | INFO     | solver:test:374 - carrier loss: 8.244586206274107e-05
+2025-11-22 14:35:53.132 | INFO     | solver:test:375 - carrier SnR: 26.893932342529297
+2025-11-22 14:35:53.132 | INFO     | solver:test:376 - message loss: 0.002220528791300379
+2025-11-22 14:35:53.133 | INFO     | solver:test:377 - message SnR: 9.073461532592773
+2025-11-22 14:35:53.137 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:36:33.267 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 38_epoch
+2025-11-22 14:36:33.375 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:36:33.376 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:36:41.418 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:36:41.419 | INFO     | solver:test:374 - carrier loss: 8.57875801067656e-05
+2025-11-22 14:36:41.420 | INFO     | solver:test:375 - carrier SnR: 26.721378326416016
+2025-11-22 14:36:41.421 | INFO     | solver:test:376 - message loss: 0.0021698268202061835
+2025-11-22 14:36:41.421 | INFO     | solver:test:377 - message SnR: 9.175125122070312
+2025-11-22 14:36:41.426 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:37:21.138 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 39_epoch
+2025-11-22 14:37:21.151 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:37:21.151 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:37:28.574 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:37:28.576 | INFO     | solver:test:374 - carrier loss: 8.038039959501475e-05
+2025-11-22 14:37:28.577 | INFO     | solver:test:375 - carrier SnR: 27.004117965698242
+2025-11-22 14:37:28.579 | INFO     | solver:test:376 - message loss: 0.002225262471116506
+2025-11-22 14:37:28.580 | INFO     | solver:test:377 - message SnR: 9.063016891479492
+2025-11-22 14:37:28.590 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:38:08.795 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 40_epoch
+2025-11-22 14:38:08.824 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:38:08.825 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:38:17.124 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:38:17.126 | INFO     | solver:test:374 - carrier loss: 7.603481208207086e-05
+2025-11-22 14:38:17.127 | INFO     | solver:test:375 - carrier SnR: 27.245494842529297
+2025-11-22 14:38:17.128 | INFO     | solver:test:376 - message loss: 0.002177852214887165
+2025-11-22 14:38:17.129 | INFO     | solver:test:377 - message SnR: 9.158912658691406
+2025-11-22 14:38:17.138 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:38:56.840 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 41_epoch
+2025-11-22 14:38:56.946 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:38:56.946 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:39:05.282 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:39:05.283 | INFO     | solver:test:374 - carrier loss: 9.094775305129588e-05
+2025-11-22 14:39:05.283 | INFO     | solver:test:375 - carrier SnR: 26.467700958251953
+2025-11-22 14:39:05.283 | INFO     | solver:test:376 - message loss: 0.0020480432520763804
+2025-11-22 14:39:05.284 | INFO     | solver:test:377 - message SnR: 9.424044609069824
+2025-11-22 14:39:05.288 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:39:45.122 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 42_epoch
+2025-11-22 14:39:45.212 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:39:45.213 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:39:52.892 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:39:52.892 | INFO     | solver:test:374 - carrier loss: 7.690579346112478e-05
+2025-11-22 14:39:52.893 | INFO     | solver:test:375 - carrier SnR: 27.19603157043457
+2025-11-22 14:39:52.893 | INFO     | solver:test:376 - message loss: 0.0021584828411085675
+2025-11-22 14:39:52.894 | INFO     | solver:test:377 - message SnR: 9.198354721069336
+2025-11-22 14:39:52.899 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:40:33.399 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 43_epoch
+2025-11-22 14:40:33.532 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:40:33.535 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:40:41.709 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:40:41.709 | INFO     | solver:test:374 - carrier loss: 8.213887485908344e-05
+2025-11-22 14:40:41.710 | INFO     | solver:test:375 - carrier SnR: 26.91013526916504
+2025-11-22 14:40:41.710 | INFO     | solver:test:376 - message loss: 0.002092904836619989
+2025-11-22 14:40:41.711 | INFO     | solver:test:377 - message SnR: 9.329012870788574
+2025-11-22 14:40:41.715 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:41:21.310 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 44_epoch
+2025-11-22 14:41:21.378 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:41:21.379 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:41:30.124 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:41:30.124 | INFO     | solver:test:374 - carrier loss: 7.974967901156141e-05
+2025-11-22 14:41:30.125 | INFO     | solver:test:375 - carrier SnR: 27.038331985473633
+2025-11-22 14:41:30.125 | INFO     | solver:test:376 - message loss: 0.002074197216783292
+2025-11-22 14:41:30.125 | INFO     | solver:test:377 - message SnR: 9.372562408447266
+2025-11-22 14:41:30.130 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:42:10.077 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 45_epoch
+2025-11-22 14:42:10.136 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:42:10.137 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:42:18.713 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:42:18.713 | INFO     | solver:test:374 - carrier loss: 7.589322922285646e-05
+2025-11-22 14:42:18.714 | INFO     | solver:test:375 - carrier SnR: 27.253589630126953
+2025-11-22 14:42:18.714 | INFO     | solver:test:376 - message loss: 0.0021160688304987093
+2025-11-22 14:42:18.715 | INFO     | solver:test:377 - message SnR: 9.284331321716309
+2025-11-22 14:42:18.720 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:42:58.006 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 46_epoch
+2025-11-22 14:42:58.119 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:42:58.120 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:43:06.253 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:43:06.253 | INFO     | solver:test:374 - carrier loss: 8.061964819297337e-05
+2025-11-22 14:43:06.254 | INFO     | solver:test:375 - carrier SnR: 26.9912109375
+2025-11-22 14:43:06.254 | INFO     | solver:test:376 - message loss: 0.002062303788709239
+2025-11-22 14:43:06.255 | INFO     | solver:test:377 - message SnR: 9.396023750305176
+2025-11-22 14:43:06.260 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:43:46.158 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 47_epoch
+2025-11-22 14:43:46.269 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:43:46.270 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:43:54.170 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:43:54.171 | INFO     | solver:test:374 - carrier loss: 7.847516098991036e-05
+2025-11-22 14:43:54.172 | INFO     | solver:test:375 - carrier SnR: 27.108299255371094
+2025-11-22 14:43:54.172 | INFO     | solver:test:376 - message loss: 0.0020553737189262533
+2025-11-22 14:43:54.173 | INFO     | solver:test:377 - message SnR: 9.411871910095215
+2025-11-22 14:43:54.178 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:44:33.893 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 48_epoch
+2025-11-22 14:44:33.936 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:44:33.936 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:44:42.413 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:44:42.414 | INFO     | solver:test:374 - carrier loss: 7.857344462536275e-05
+2025-11-22 14:44:42.416 | INFO     | solver:test:375 - carrier SnR: 27.102863311767578
+2025-11-22 14:44:42.417 | INFO     | solver:test:376 - message loss: 0.002029115208782829
+2025-11-22 14:44:42.418 | INFO     | solver:test:377 - message SnR: 9.468029975891113
+2025-11-22 14:44:42.425 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:45:21.673 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 49_epoch
+2025-11-22 14:45:21.784 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:45:21.785 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:45:30.117 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:45:30.117 | INFO     | solver:test:374 - carrier loss: 7.939822059527684e-05
+2025-11-22 14:45:30.118 | INFO     | solver:test:375 - carrier SnR: 27.057514190673828
+2025-11-22 14:45:30.118 | INFO     | solver:test:376 - message loss: 0.0020480568637140095
+2025-11-22 14:45:30.118 | INFO     | solver:test:377 - message SnR: 9.425493240356445
+2025-11-22 14:45:30.122 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:46:09.927 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 50_epoch
+2025-11-22 14:46:10.057 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:46:10.058 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:46:17.615 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:46:17.616 | INFO     | solver:test:374 - carrier loss: 7.932639122233153e-05
+2025-11-22 14:46:17.616 | INFO     | solver:test:375 - carrier SnR: 27.061443328857422
+2025-11-22 14:46:17.617 | INFO     | solver:test:376 - message loss: 0.00200440300306162
+2025-11-22 14:46:17.617 | INFO     | solver:test:377 - message SnR: 9.521430969238281
+2025-11-22 14:46:17.623 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:46:58.172 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 51_epoch
+2025-11-22 14:46:58.258 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:46:58.259 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:47:06.382 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:47:06.383 | INFO     | solver:test:374 - carrier loss: 7.861847552703694e-05
+2025-11-22 14:47:06.384 | INFO     | solver:test:375 - carrier SnR: 27.100374221801758
+2025-11-22 14:47:06.390 | INFO     | solver:test:376 - message loss: 0.002008846410227796
+2025-11-22 14:47:06.392 | INFO     | solver:test:377 - message SnR: 9.510565757751465
+2025-11-22 14:47:06.405 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:47:46.328 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 52_epoch
+2025-11-22 14:47:46.442 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:47:46.443 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:47:54.149 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:47:54.150 | INFO     | solver:test:374 - carrier loss: 7.927993563218758e-05
+2025-11-22 14:47:54.150 | INFO     | solver:test:375 - carrier SnR: 27.063987731933594
+2025-11-22 14:47:54.150 | INFO     | solver:test:376 - message loss: 0.001979785734035361
+2025-11-22 14:47:54.151 | INFO     | solver:test:377 - message SnR: 9.573156356811523
+2025-11-22 14:47:54.155 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:48:33.834 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 53_epoch
+2025-11-22 14:48:33.955 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:48:33.955 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:48:41.928 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:48:41.929 | INFO     | solver:test:374 - carrier loss: 7.941782762197993e-05
+2025-11-22 14:48:41.929 | INFO     | solver:test:375 - carrier SnR: 27.056440353393555
+2025-11-22 14:48:41.930 | INFO     | solver:test:376 - message loss: 0.0019518219722578158
+2025-11-22 14:48:41.930 | INFO     | solver:test:377 - message SnR: 9.63640308380127
+2025-11-22 14:48:41.935 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:49:21.177 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 54_epoch
+2025-11-22 14:49:21.273 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:49:21.273 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:49:29.694 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:49:29.695 | INFO     | solver:test:374 - carrier loss: 8.577307016821578e-05
+2025-11-22 14:49:29.695 | INFO     | solver:test:375 - carrier SnR: 26.722110748291016
+2025-11-22 14:49:29.696 | INFO     | solver:test:376 - message loss: 0.0019055513951640863
+2025-11-22 14:49:29.696 | INFO     | solver:test:377 - message SnR: 9.740461349487305
+2025-11-22 14:49:29.701 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:50:09.491 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 55_epoch
+2025-11-22 14:50:09.605 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:50:09.605 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:50:17.902 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:50:17.903 | INFO     | solver:test:374 - carrier loss: 7.435613840173643e-05
+2025-11-22 14:50:17.904 | INFO     | solver:test:375 - carrier SnR: 27.342451095581055
+2025-11-22 14:50:17.904 | INFO     | solver:test:376 - message loss: 0.0020054558005470494
+2025-11-22 14:50:17.905 | INFO     | solver:test:377 - message SnR: 9.518674850463867
+2025-11-22 14:50:17.910 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:50:58.397 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 56_epoch
+2025-11-22 14:50:58.467 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:50:58.470 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:51:06.777 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:51:06.780 | INFO     | solver:test:374 - carrier loss: 7.904461801025228e-05
+2025-11-22 14:51:06.782 | INFO     | solver:test:375 - carrier SnR: 27.07689666748047
+2025-11-22 14:51:06.783 | INFO     | solver:test:376 - message loss: 0.001957983463608588
+2025-11-22 14:51:06.784 | INFO     | solver:test:377 - message SnR: 9.619280815124512
+2025-11-22 14:51:06.800 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:51:46.966 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 57_epoch
+2025-11-22 14:51:47.013 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:51:47.013 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:51:55.112 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:51:55.113 | INFO     | solver:test:374 - carrier loss: 8.11742874457895e-05
+2025-11-22 14:51:55.114 | INFO     | solver:test:375 - carrier SnR: 26.961435317993164
+2025-11-22 14:51:55.114 | INFO     | solver:test:376 - message loss: 0.0019107955561664242
+2025-11-22 14:51:55.114 | INFO     | solver:test:377 - message SnR: 9.72714614868164
+2025-11-22 14:51:55.120 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:52:35.412 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 58_epoch
+2025-11-22 14:52:35.515 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:52:35.516 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:52:43.235 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:52:43.235 | INFO     | solver:test:374 - carrier loss: 7.712140611077372e-05
+2025-11-22 14:52:43.236 | INFO     | solver:test:375 - carrier SnR: 27.183870315551758
+2025-11-22 14:52:43.237 | INFO     | solver:test:376 - message loss: 0.001946466074934086
+2025-11-22 14:52:43.238 | INFO     | solver:test:377 - message SnR: 9.647638320922852
+2025-11-22 14:52:43.246 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:53:23.223 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 59_epoch
+2025-11-22 14:53:23.320 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:53:23.323 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:53:32.110 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:53:32.111 | INFO     | solver:test:374 - carrier loss: 7.11666059662373e-05
+2025-11-22 14:53:32.111 | INFO     | solver:test:375 - carrier SnR: 27.53285789489746
+2025-11-22 14:53:32.112 | INFO     | solver:test:376 - message loss: 0.0019908151678884258
+2025-11-22 14:53:32.112 | INFO     | solver:test:377 - message SnR: 9.554076194763184
+2025-11-22 14:53:32.117 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:54:12.568 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 60_epoch
+2025-11-22 14:54:12.683 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:54:12.686 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:54:21.409 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:54:21.411 | INFO     | solver:test:374 - carrier loss: 7.43457071971184e-05
+2025-11-22 14:54:21.413 | INFO     | solver:test:375 - carrier SnR: 27.343061447143555
+2025-11-22 14:54:21.414 | INFO     | solver:test:376 - message loss: 0.001917048661897962
+2025-11-22 14:54:21.415 | INFO     | solver:test:377 - message SnR: 9.716362953186035
+2025-11-22 14:54:21.427 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:55:01.629 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 61_epoch
+2025-11-22 14:55:01.703 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:55:01.703 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:55:10.459 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:55:10.460 | INFO     | solver:test:374 - carrier loss: 7.376895938740255e-05
+2025-11-22 14:55:10.461 | INFO     | solver:test:375 - carrier SnR: 27.37688446044922
+2025-11-22 14:55:10.461 | INFO     | solver:test:376 - message loss: 0.0019243372819171501
+2025-11-22 14:55:10.462 | INFO     | solver:test:377 - message SnR: 9.698582649230957
+2025-11-22 14:55:10.467 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:55:50.201 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 62_epoch
+2025-11-22 14:55:50.310 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:55:50.311 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:55:59.254 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:55:59.258 | INFO     | solver:test:374 - carrier loss: 7.333006215048954e-05
+2025-11-22 14:55:59.259 | INFO     | solver:test:375 - carrier SnR: 27.402799606323242
+2025-11-22 14:55:59.261 | INFO     | solver:test:376 - message loss: 0.0019239483204168768
+2025-11-22 14:55:59.262 | INFO     | solver:test:377 - message SnR: 9.698894500732422
+2025-11-22 14:55:59.275 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:56:39.968 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 63_epoch
+2025-11-22 14:56:40.070 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:56:40.071 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:56:47.529 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:56:47.530 | INFO     | solver:test:374 - carrier loss: 7.368356595039726e-05
+2025-11-22 14:56:47.531 | INFO     | solver:test:375 - carrier SnR: 27.381914138793945
+2025-11-22 14:56:47.531 | INFO     | solver:test:376 - message loss: 0.001909269221449414
+2025-11-22 14:56:47.532 | INFO     | solver:test:377 - message SnR: 9.732599258422852
+2025-11-22 14:56:47.539 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:57:28.048 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 64_epoch
+2025-11-22 14:57:28.126 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:57:28.128 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:57:35.977 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:57:35.978 | INFO     | solver:test:374 - carrier loss: 7.543050742242485e-05
+2025-11-22 14:57:35.978 | INFO     | solver:test:375 - carrier SnR: 27.2801513671875
+2025-11-22 14:57:35.978 | INFO     | solver:test:376 - message loss: 0.0018907266695840429
+2025-11-22 14:57:35.979 | INFO     | solver:test:377 - message SnR: 9.775287628173828
+2025-11-22 14:57:35.983 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:58:16.553 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 65_epoch
+2025-11-22 14:58:16.655 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:58:16.656 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:58:24.502 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:58:24.503 | INFO     | solver:test:374 - carrier loss: 7.555646852079708e-05
+2025-11-22 14:58:24.503 | INFO     | solver:test:375 - carrier SnR: 27.272905349731445
+2025-11-22 14:58:24.504 | INFO     | solver:test:376 - message loss: 0.0018923145432311755
+2025-11-22 14:58:24.504 | INFO     | solver:test:377 - message SnR: 9.772238731384277
+2025-11-22 14:58:24.511 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:59:04.229 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 66_epoch
+2025-11-22 14:59:04.368 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:59:04.368 | INFO     | solver:test:351 - start validation...
+2025-11-22 14:59:12.832 | INFO     | solver:test:373 - finished validation!
+2025-11-22 14:59:12.834 | INFO     | solver:test:374 - carrier loss: 7.59948530825428e-05
+2025-11-22 14:59:12.835 | INFO     | solver:test:375 - carrier SnR: 27.247779846191406
+2025-11-22 14:59:12.836 | INFO     | solver:test:376 - message loss: 0.0018980831373482943
+2025-11-22 14:59:12.837 | INFO     | solver:test:377 - message SnR: 9.756636619567871
+2025-11-22 14:59:12.842 | DEBUG    | solver:train:279 - train mode
+2025-11-22 14:59:52.367 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 67_epoch
+2025-11-22 14:59:52.433 | INFO     | solver:test:349 - phase: validation
+2025-11-22 14:59:52.434 | INFO     | solver:test:351 - start validation...
+2025-11-22 15:00:00.227 | INFO     | solver:test:373 - finished validation!
+2025-11-22 15:00:00.227 | INFO     | solver:test:374 - carrier loss: 7.833831282019113e-05
+2025-11-22 15:00:00.228 | INFO     | solver:test:375 - carrier SnR: 27.115877151489258
+2025-11-22 15:00:00.228 | INFO     | solver:test:376 - message loss: 0.0018671098245809285
+2025-11-22 15:00:00.228 | INFO     | solver:test:377 - message SnR: 9.830658912658691
+2025-11-22 15:00:00.232 | DEBUG    | solver:train:279 - train mode
+2025-11-22 15:00:39.858 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 68_epoch
+2025-11-22 15:00:39.946 | INFO     | solver:test:349 - phase: validation
+2025-11-22 15:00:39.947 | INFO     | solver:test:351 - start validation...
+2025-11-22 15:00:48.282 | INFO     | solver:test:373 - finished validation!
+2025-11-22 15:00:48.284 | INFO     | solver:test:374 - carrier loss: 7.659977759780864e-05
+2025-11-22 15:00:48.284 | INFO     | solver:test:375 - carrier SnR: 27.213346481323242
+2025-11-22 15:00:48.285 | INFO     | solver:test:376 - message loss: 0.0018728735964172161
+2025-11-22 15:00:48.285 | INFO     | solver:test:377 - message SnR: 9.817485809326172
+2025-11-22 15:00:48.297 | DEBUG    | solver:train:279 - train mode
+2025-11-22 15:01:28.220 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 69_epoch
+2025-11-22 15:01:28.303 | INFO     | solver:test:349 - phase: validation
+2025-11-22 15:01:28.304 | INFO     | solver:test:351 - start validation...
+2025-11-22 15:01:36.703 | INFO     | solver:test:373 - finished validation!
+2025-11-22 15:01:36.703 | INFO     | solver:test:374 - carrier loss: 7.664783110018246e-05
+2025-11-22 15:01:36.704 | INFO     | solver:test:375 - carrier SnR: 27.210620880126953
+2025-11-22 15:01:36.704 | INFO     | solver:test:376 - message loss: 0.0018646656804216595
+2025-11-22 15:01:36.705 | INFO     | solver:test:377 - message SnR: 9.838929176330566
+2025-11-22 15:01:36.710 | DEBUG    | solver:train:279 - train mode
+2025-11-22 15:02:16.009 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 70_epoch
+2025-11-22 15:02:16.086 | INFO     | solver:test:349 - phase: validation
+2025-11-22 15:02:16.087 | INFO     | solver:test:351 - start validation...
+2025-11-22 15:02:24.550 | INFO     | solver:test:373 - finished validation!
+2025-11-22 15:02:24.550 | INFO     | solver:test:374 - carrier loss: 7.41015246603638e-05
+2025-11-22 15:02:24.551 | INFO     | solver:test:375 - carrier SnR: 27.357349395751953
+2025-11-22 15:02:24.551 | INFO     | solver:test:376 - message loss: 0.0018887181694690997
+2025-11-22 15:02:24.551 | INFO     | solver:test:377 - message SnR: 9.780631065368652
+2025-11-22 15:02:24.556 | DEBUG    | solver:train:279 - train mode
+2025-11-22 15:03:04.984 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 71_epoch
+2025-11-22 15:03:05.065 | INFO     | solver:test:349 - phase: validation
+2025-11-22 15:03:05.066 | INFO     | solver:test:351 - start validation...
+2025-11-22 15:03:13.343 | INFO     | solver:test:373 - finished validation!
+2025-11-22 15:03:13.344 | INFO     | solver:test:374 - carrier loss: 7.432315760524943e-05
+2025-11-22 15:03:13.345 | INFO     | solver:test:375 - carrier SnR: 27.344379425048828
+2025-11-22 15:03:13.345 | INFO     | solver:test:376 - message loss: 0.001876737156775422
+2025-11-22 15:03:13.345 | INFO     | solver:test:377 - message SnR: 9.80928897857666
+2025-11-22 15:03:13.351 | DEBUG    | solver:train:279 - train mode
+2025-11-22 15:03:53.078 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 72_epoch
+2025-11-22 15:03:53.188 | INFO     | solver:test:349 - phase: validation
+2025-11-22 15:03:53.188 | INFO     | solver:test:351 - start validation...
+2025-11-22 15:04:01.393 | INFO     | solver:test:373 - finished validation!
+2025-11-22 15:04:01.394 | INFO     | solver:test:374 - carrier loss: 7.304758960694577e-05
+2025-11-22 15:04:01.395 | INFO     | solver:test:375 - carrier SnR: 27.41956329345703
+2025-11-22 15:04:01.395 | INFO     | solver:test:376 - message loss: 0.0018769994942256464
+2025-11-22 15:04:01.396 | INFO     | solver:test:377 - message SnR: 9.807840347290039
+2025-11-22 15:04:01.402 | DEBUG    | solver:train:279 - train mode
+2025-11-22 15:04:41.768 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 73_epoch
+2025-11-22 15:04:41.862 | INFO     | solver:test:349 - phase: validation
+2025-11-22 15:04:41.863 | INFO     | solver:test:351 - start validation...
+2025-11-22 15:04:50.750 | INFO     | solver:test:373 - finished validation!
+2025-11-22 15:04:50.750 | INFO     | solver:test:374 - carrier loss: 7.582957186968997e-05
+2025-11-22 15:04:50.751 | INFO     | solver:test:375 - carrier SnR: 27.257234573364258
+2025-11-22 15:04:50.751 | INFO     | solver:test:376 - message loss: 0.0018768729731583824
+2025-11-22 15:04:50.752 | INFO     | solver:test:377 - message SnR: 9.808823585510254
+2025-11-22 15:04:50.757 | DEBUG    | solver:train:279 - train mode
+2025-11-22 15:05:30.491 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 74_epoch
+2025-11-22 15:05:30.594 | INFO     | solver:test:349 - phase: validation
+2025-11-22 15:05:30.595 | INFO     | solver:test:351 - start validation...
+2025-11-22 15:05:38.767 | INFO     | solver:test:373 - finished validation!
+2025-11-22 15:05:38.768 | INFO     | solver:test:374 - carrier loss: 7.22292679711245e-05
+2025-11-22 15:05:38.772 | INFO     | solver:test:375 - carrier SnR: 27.468488693237305
+2025-11-22 15:05:38.773 | INFO     | solver:test:376 - message loss: 0.0018816233361856295
+2025-11-22 15:05:38.774 | INFO     | solver:test:377 - message SnR: 9.799688339233398
+2025-11-22 15:05:38.779 | DEBUG    | solver:train:279 - train mode
+2025-11-22 15:06:18.946 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 75_epoch
+2025-11-22 15:06:19.031 | INFO     | solver:test:349 - phase: validation
+2025-11-22 15:06:19.035 | INFO     | solver:test:351 - start validation...
+2025-11-22 15:06:27.399 | INFO     | solver:test:373 - finished validation!
+2025-11-22 15:06:27.402 | INFO     | solver:test:374 - carrier loss: 7.68919344409369e-05
+2025-11-22 15:06:27.404 | INFO     | solver:test:375 - carrier SnR: 27.196815490722656
+2025-11-22 15:06:27.405 | INFO     | solver:test:376 - message loss: 0.001844530508746035
+2025-11-22 15:06:27.405 | INFO     | solver:test:377 - message SnR: 9.883635520935059
+2025-11-22 15:06:27.418 | DEBUG    | solver:train:279 - train mode
+2025-11-22 15:07:07.256 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 76_epoch
+2025-11-22 15:07:07.340 | INFO     | solver:test:349 - phase: validation
+2025-11-22 15:07:07.341 | INFO     | solver:test:351 - start validation...
+2025-11-22 15:07:16.237 | INFO     | solver:test:373 - finished validation!
+2025-11-22 15:07:16.238 | INFO     | solver:test:374 - carrier loss: 7.587936852360144e-05
+2025-11-22 15:07:16.239 | INFO     | solver:test:375 - carrier SnR: 27.254383087158203
+2025-11-22 15:07:16.239 | INFO     | solver:test:376 - message loss: 0.0018430938003942943
+2025-11-22 15:07:16.240 | INFO     | solver:test:377 - message SnR: 9.887557029724121
+2025-11-22 15:07:16.245 | DEBUG    | solver:train:279 - train mode
+2025-11-22 15:07:56.546 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 77_epoch
+2025-11-22 15:07:56.620 | INFO     | solver:test:349 - phase: validation
+2025-11-22 15:07:56.620 | INFO     | solver:test:351 - start validation...
+2025-11-22 15:08:04.902 | INFO     | solver:test:373 - finished validation!
+2025-11-22 15:08:04.902 | INFO     | solver:test:374 - carrier loss: 7.082513184286654e-05
+2025-11-22 15:08:04.903 | INFO     | solver:test:375 - carrier SnR: 27.553749084472656
+2025-11-22 15:08:04.903 | INFO     | solver:test:376 - message loss: 0.001882244694010856
+2025-11-22 15:08:04.903 | INFO     | solver:test:377 - message SnR: 9.795918464660645
+2025-11-22 15:08:04.907 | DEBUG    | solver:train:279 - train mode
+2025-11-22 15:08:45.707 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 78_epoch
+2025-11-22 15:08:45.818 | INFO     | solver:test:349 - phase: validation
+2025-11-22 15:08:45.818 | INFO     | solver:test:351 - start validation...
+2025-11-22 15:08:53.551 | INFO     | solver:test:373 - finished validation!
+2025-11-22 15:08:53.552 | INFO     | solver:test:374 - carrier loss: 7.109621219569817e-05
+2025-11-22 15:08:53.553 | INFO     | solver:test:375 - carrier SnR: 27.53715705871582
+2025-11-22 15:08:53.553 | INFO     | solver:test:376 - message loss: 0.0018809440393502323
+2025-11-22 15:08:53.553 | INFO     | solver:test:377 - message SnR: 9.800848007202148
+2025-11-22 15:08:53.557 | DEBUG    | solver:train:279 - train mode
+2025-11-22 15:09:33.475 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 79_epoch
+2025-11-22 15:09:33.631 | INFO     | solver:test:349 - phase: validation
+2025-11-22 15:09:33.631 | INFO     | solver:test:351 - start validation...
+2025-11-22 15:09:41.655 | INFO     | solver:test:373 - finished validation!
+2025-11-22 15:09:41.655 | INFO     | solver:test:374 - carrier loss: 7.015126175247133e-05
+2025-11-22 15:09:41.656 | INFO     | solver:test:375 - carrier SnR: 27.595266342163086
+2025-11-22 15:09:41.656 | INFO     | solver:test:376 - message loss: 0.0018791782741363232
+2025-11-22 15:09:41.657 | INFO     | solver:test:377 - message SnR: 9.804320335388184
+2025-11-22 15:09:41.661 | DEBUG    | solver:train:279 - train mode
+2025-11-22 15:10:22.103 | INFO     | solver:save_models:64 - saving model to: /home/yyx/hideandspeak-log-272/ckpt
+==> suffix: 80_epoch
+2025-11-22 15:10:22.189 | INFO     | solver:test:349 - phase: validation
+2025-11-22 15:10:22.189 | INFO     | solver:test:351 - start validation...
+2025-11-22 15:10:30.511 | INFO     | solver:test:373 - finished validation!
+2025-11-22 15:10:30.514 | INFO     | solver:test:374 - carrier loss: 7.501742388390434e-05
+2025-11-22 15:10:30.517 | INFO     | solver:test:375 - carrier SnR: 27.303998947143555
+2025-11-22 15:10:30.518 | INFO     | solver:test:376 - message loss: 0.0018315519958447951
+2025-11-22 15:10:30.519 | INFO     | solver:test:377 - message SnR: 9.915688514709473
+2025-11-22 15:10:30.530 | INFO     | solver:train:335 - finished training!
+2025-11-22 15:10:30.534 | INFO     | __main__:run_all:406 - Training complete!lr:0.0015
+2025-11-22 15:10:30.551 | INFO     | __main__:run_all:409 - Training complete!
+2025-11-22 15:10:30.552 | INFO     | __main__:run_all:410 - lr: 0.0015, batch_size: 32, mode: train, single: True, lambda_carrier: 9.0, lambda_msg: 1.0, freeze_num: 1, model_type: normal, lr: 0.00151
+2025-11-22 15:10:30.608 | DEBUG    | model:get_models:186 - FullEncoder(
+  (encoder_first): Encoder(
+    (main): Sequential(
+      (0): GatedBlock(
+        (conv): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (1): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (2): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+    )
+  )
+  (encoder_second): CarrierDecoder(
+    (main): Sequential(
+      (0): GatedBlock(
+        (conv): Conv2d(65, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(65, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (1): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (2): GatedBlock(
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+      (3): GatedBlock(
+        (conv): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+        (gate): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+  )
+)
+2025-11-22 15:10:30.612 | DEBUG    | model:get_models:187 - MsgDecoder(
+  (main): Sequential(
+    (0): GatedBlock(
+      (conv): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (1): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (2): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (3): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (4): GatedBlock(
+      (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (5): GatedBlock(
+      (conv): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (gate): Conv2d(64, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+)
+2025-11-22 15:10:30.643 | INFO     | model:load_models:153 - loader models
+2025-11-22 15:17:03.301 | INFO     | experiment:save:178 - saving experiment

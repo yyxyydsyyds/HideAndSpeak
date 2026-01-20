@@ -1,0 +1,89 @@
+_wandb:
+    value:
+        cli_version: 0.19.11
+        m: []
+        python_version: 3.8.13
+        t:
+            "1":
+                - 1
+                - 55
+                - 106
+            "2":
+                - 1
+                - 55
+                - 106
+            "3":
+                - 13
+                - 23
+                - 55
+                - 61
+            "4": 3.8.13
+            "5": 0.19.11
+            "8":
+                - 5
+            "12": 0.19.11
+            "13": linux-x86_64
+ablate_mode:
+    value: tile
+batch_size:
+    value: 32
+block_type:
+    value: normal
+cols:
+    value: 8
+dataset:
+    value: timit
+dec_c_n_layers:
+    value: 4
+enc_n_layers:
+    value: 3
+freeze_num:
+    value: 1
+lambda_carrier_loss:
+    value: 9
+lambda_msg_loss:
+    value: 1
+load_ckpt:
+    value: null
+loss_type:
+    value: mse
+lr:
+    value: 0.0015
+max_batches:
+    value: 10
+message_file:
+    value: /home/yyx/TIMIT/TRAIN/SA1.WAV.wav
+mode:
+    value: train
+model_type:
+    value: normal
+n_pairs:
+    value: 32
+norm:
+    value: instance
+num_iters:
+    value: 80
+num_workers:
+    value: 20
+outdir:
+    value: ablate_out
+rows:
+    value: 8
+run_dir:
+    value: /home/yyx/hideandspeak-log
+sample_every:
+    value: null
+save_model_every:
+    value: null
+single:
+    value: true
+target:
+    value: container
+test_path:
+    value: /home/yyx/TIMIT/TEST
+train_path:
+    value: /home/yyx/TIMIT/TRAIN
+use_wandb:
+    value: true
+val_path:
+    value: /home/yyx/TIMIT/VAL
