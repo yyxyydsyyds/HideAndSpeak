@@ -49,73 +49,45 @@ def spect_loader(path:str, trim_start:int, return_phase=False, num_samples=16000
 #     y, _ = soundfile.read(path)
 
 #     if crop:
-#         y = y[trim_start: trim_start + num_samples]
-#         y = np.hstack((y, np.zeros((num_samples - len(y)))))  # Pad with zeros if necessary
+#         y = y[trim_start: trim_start + num_samples]  # trim 'trim_start' from start and crop 1 sec
+#         y = np.hstack((y, np.zeros((num_samples - len(y)))))
+
+#         assert y.shape == (num_samples,)
 
 #     stft = STFT(hparams.N_FFT, hparams.HOP_LENGTH)
-#     y = torch.FloatTensor(y).unsqueeze(0)  # Convert to Tensor and add batch dimension
-#     spect, phase = stft.transform(y)  # Get the magnitude and phase
+#     y = torch.FloatTensor(y).unsqueeze(0)
+#     assert y.shape == (1, num_samples)
+#     spect, phase = stft.transform(y)
 
-#     # Magnitude Spectrum (振幅谱)
-#     magnitude = spect.abs()
+#     # # Magnitude Spectrum (振幅谱)
+#     # magnitude = spect.abs()
     
-#     # Phase Spectrum (相位谱)
-#     phase = torch.angle(spect)
+#     # # Phase Spectrum (相位谱)
+#     # phase = torch.angle(spect)
 
-#     # Power Spectrum (功率谱)
-#     power = magnitude ** 2
+#     # # Power Spectrum (功率谱)
+#     # power = magnitude ** 2
+#     if return_phase:
+#         return spect, phase
+    
+#     return spect
+def spect_loader_with_audio(path:str, trim_start:int, return_phase=False, num_samples=16000, crop=True):
+    """返回频谱和原始音频"""
+    y, _ = soundfile.read(path)
 
-#     # Combine the features as channels: magnitude, phase, and power
-#     # You can also apply a log transformation to the power and magnitude if needed
-#     combined = torch.cat((magnitude, phase, power), dim=1)
+    if crop:
+        y = y[trim_start: trim_start + num_samples]
+        y = np.hstack((y, np.zeros((num_samples - len(y)))))
 
-#     return combined
-# def spect_loader_three_channels(path: str, trim_start: int, num_samples=16000, crop=True) -> torch.Tensor:
-#     """
-#     加载音频并返回三通道频谱图：振幅、相位、功率
-#     """
-#     y, _ = soundfile.read(path)
+    stft = STFT(hparams.N_FFT, hparams.HOP_LENGTH)
+    y_tensor = torch.FloatTensor(y).unsqueeze(0)
+    spect, phase = stft.transform(y_tensor)
 
-#     if crop:
-#         y = y[trim_start: trim_start + num_samples]
-#         y = np.hstack((y, np.zeros((num_samples - len(y)))))  # Pad with zeros if necessary
+    if return_phase:
+        return spect, phase, y  # 返回原始音频
+    return spect, y  # 返回原始音频
 
-#     stft = STFT(hparams.N_FFT, hparams.HOP_LENGTH)
-#     y = torch.FloatTensor(y).unsqueeze(0)  # Convert to Tensor and add batch dimension
     
-#     # 获取复数频谱
-#     complex_spect, _ = stft.transform(y)  # complex_spect 是复数张量
-    
-#     # 打印调试信息
-#     debug_print(f"Audio file: {path}")
-#     debug_print(f"Input audio shape: {y.shape}")
-#     debug_print(f"Complex spectrogram shape: {complex_spect.shape}")
-#     debug_print(f"Complex spectrogram dtype: {complex_spect.dtype}")
-    
-#     # 从复数频谱计算三个特征
-#     # 1. Magnitude Spectrum (振幅谱)
-#     magnitude = torch.abs(complex_spect)
-    
-#     # 2. Phase Spectrum (相位谱)
-#     phase = torch.angle(complex_spect)
-    
-#     # 3. Power Spectrum (功率谱)
-#     power = magnitude ** 2
-    
-#     debug_print(f"Magnitude shape: {magnitude.shape}")
-#     debug_print(f"Phase shape: {phase.shape}")
-#     debug_print(f"Power shape: {power.shape}")
-    
-#     # 使用 torch.stack 在新维度上堆叠三个通道
-#     # 输入：三个 [1, 129, 378] 的张量
-#     # 输出：[3, 129, 378]，然后添加batch维度得到 [1, 3, 129, 378]
-#     combined = torch.stack([magnitude.squeeze(0), phase.squeeze(0), power.squeeze(0)], dim=0)
-#     combined = combined.unsqueeze(0)  # 添加batch维度
-    
-#     debug_print(f"Final output shape: {combined.shape}")
-    
-#     return combined
-
 def make_single_dataset(path, message_file, n_pairs):
     pairs = []
     wav_files = list(fileutils.iter_find_files(path, "*.wav"))

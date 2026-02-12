@@ -20,7 +20,7 @@ def get_hparams():
     global gl_hparams
     parser = argparse.ArgumentParser(description='Hide and Speak')
     parser.add_argument('--lr', type=float, default=0.001, help='')
-    parser.add_argument('--num_iters', type=int, default=100, help='number of epochs')
+    parser.add_argument('--num_iters', type=int, default=80, help='number of epochs')
     parser.add_argument('--loss_type', type=str, default='mse', choices=['mse', 'abs'], help='loss function used for training')
     parser.add_argument('--mode', type=str, default='train', choices=['train', 'test', 'sample'], help='`train` will initiate training, `test` should be used in conjunction with `load_ckpt` to run a test epoch, `sample` should be used in conjunction with `load_ckpt` to sample examples from dataset')
     parser.add_argument('--train_path', required=True, type=str, help='path to training set. should be a folder containing .wav files for training')
@@ -45,12 +45,26 @@ def get_hparams():
     parser.add_argument('--single', type=bool, default=False)
     parser.add_argument('--message_file', type=str)
 
-    parser.add_argument('--model_type', type=str, default='normal', choices=['normal','GAN','unet'], help='type of model')
+    parser.add_argument('--model_type', type=str, default='normal', choices=['normal','GAN','unet','transformer'], help='type of model')
     parser.add_argument('--freeze_num', type=int, default=1, help='num of epochs to freeze discriminator')
     parser.add_argument('--norm', default='instance', help='batch or instance')
     parser.add_argument('--use_wandb', action='store_true', help='enable wandb logging')
 
+    parser.add_argument('--rows', type=int, default=8)
+    parser.add_argument('--cols', type=int, default=8)
+    parser.add_argument('--ablate_mode', type=str, default=None, choices=['tile','freq','time'])
+    parser.add_argument('--target', type=str, default='container',choices=['container','carrier_input','msg_input'])
+    parser.add_argument('--max_batches', type=int, default=10)
+    # parser.add_argument('--ckpt_epoch', type=int, default=3)
+    parser.add_argument('--outdir', type=str, default='ablate_out')
 
+    #transformer specific
+    parser.add_argument('--feature_size', type=int, default=129, help='Feature size for audio (e.g., FFT bins)') # Default for 256 FFT
+    parser.add_argument('--watermark_size', type=int, default=128, help='Size of the watermark vector')
+    parser.add_argument('--audio_encoder_layers', type=int, default=2, help='Number of layers in audio encoder')
+    parser.add_argument('--audio_encoder_nhead', type=int, default=3, help='Number of attention heads in audio encoder (must divide feature_size)')
+    parser.add_argument('--audio_encoder_dim_feedforward', type=int, default=512, help='Dimension of feedforward network in audio encoder')
+    parser.add_argument('--wm_encoder_hidden_size', type=int, default=256, help='Hidden size in watermark encoder')
 
     gl_hparams = parser.parse_args()
     return gl_hparams
