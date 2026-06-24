@@ -18,6 +18,16 @@ from config import gl_hparams
 from config import device
 import warnings
 
+try:
+    from pesq import pesq
+except ImportError:
+    pesq = None
+
+try:
+    from pystoi.stoi import stoi
+except ImportError:
+    stoi = None
+
 
 
 if(gl_hparams==None): 
@@ -163,6 +173,105 @@ def snr(orig: torch.Tensor, recon: torch.Tensor) -> torch.Tensor:
     # print(rms1, rms2)
     snr = 10 * torch.log10((rms1 / rms2) ** 2)
     return snr
+
+def _as_stft_input(x: torch.Tensor) -> torch.Tensor:
+    if x.ndim == 4 and x.shape[1] == 1:
+        return x.squeeze(1)
+    return x
+
+def _complex_to_mag_phase(x: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    real = x[:, 0, :, :]
+    imag = x[:, 1, :, :]
+    magnitude = torch.sqrt(real ** 2 + imag ** 2 + 1e-10)
+    phase = torch.atan2(imag, real)
+    return magnitude, phase
+
+def spect_to_audio(stft: STFT, spect: torch.Tensor, fallback_phase: torch.Tensor = None) -> torch.Tensor:
+    spect = spect.detach().cpu()
+    if spect.ndim == 4 and spect.shape[1] == 2:
+        magnitude, phase = _complex_to_mag_phase(spect)
+        return stft.inverse(magnitude, phase)
+
+    magnitude = _as_stft_input(spect)
+    if fallback_phase is None:
+        raise ValueError("fallback_phase is required for magnitude-only spectrograms")
+    phase = _as_stft_input(fallback_phase.detach().cpu())
+    return stft.inverse(magnitude, phase)
+
+def _to_numpy_audio(x: torch.Tensor) -> np.ndarray:
+    audio = x.detach().cpu().numpy().astype(np.float32)
+    audio = np.squeeze(audio)
+    return np.nan_to_num(audio)
+
+def _prepare_pesq_pair(ref: torch.Tensor, deg: torch.Tensor, min_ref_rms: float = 1e-5):
+    ref_np = _to_numpy_audio(ref)
+    deg_np = _to_numpy_audio(deg)
+    n = min(len(ref_np), len(deg_np))
+    ref_np = ref_np[:n]
+    deg_np = deg_np[:n]
+
+    ref_np = ref_np - np.mean(ref_np)
+    deg_np = deg_np - np.mean(deg_np)
+
+    ref_rms = float(np.sqrt(np.mean(ref_np ** 2)))
+    if ref_rms < min_ref_rms:
+        return None, None
+
+    ref_peak = float(np.max(np.abs(ref_np)))
+    if ref_peak > 0:
+        scale = 0.99 / ref_peak
+        ref_np = ref_np * scale
+        deg_np = deg_np * scale
+
+    return np.clip(ref_np, -1.0, 1.0), np.clip(deg_np, -1.0, 1.0)
+
+def pesq_score(stft: STFT, ref_spect: torch.Tensor, deg_spect: torch.Tensor, phase: torch.Tensor = None, sample_rate: int = 16000):
+    if pesq is None:
+        return None
+
+    ref_audio = spect_to_audio(stft, ref_spect, phase)
+    deg_audio = spect_to_audio(stft, deg_spect, phase)
+
+    scores = []
+    mode = 'wb' if sample_rate == 16000 else 'nb'
+    for ref, deg in zip(ref_audio, deg_audio):
+        ref_np, deg_np = _prepare_pesq_pair(ref, deg)
+        if ref_np is None:
+            logger.debug("skipped PESQ for one near-silent reference sample")
+            continue
+        try:
+            scores.append(pesq(sample_rate, ref_np, deg_np, mode))
+        except Exception as exc:
+            if "No utterances detected" in str(exc):
+                logger.debug(f"skipped PESQ for one sample: {exc}")
+            else:
+                logger.warning(f"failed to calculate PESQ for one sample: {exc}")
+
+    if not scores:
+        return None
+    return float(np.mean(scores))
+
+def stoi_score(stft: STFT, ref_spect: torch.Tensor, deg_spect: torch.Tensor, phase: torch.Tensor = None, sample_rate: int = 16000):
+    if stoi is None:
+        return None
+
+    ref_audio = spect_to_audio(stft, ref_spect, phase)
+    deg_audio = spect_to_audio(stft, deg_spect, phase)
+
+    scores = []
+    for ref, deg in zip(ref_audio, deg_audio):
+        ref_np, deg_np = _prepare_pesq_pair(ref, deg)
+        if ref_np is None:
+            logger.debug("skipped STOI for one near-silent reference sample")
+            continue
+        try:
+            scores.append(stoi(ref_np, deg_np, sample_rate, extended=False))
+        except Exception as exc:
+            logger.warning(f"failed to calculate STOI for one sample: {exc}")
+
+    if not scores:
+        return None
+    return float(np.mean(scores))
 
 def training_step(carrier: torch.Tensor, carrier_reconst: torch.Tensor, msg: torch.Tensor, msg_reconst: torch.Tensor, lambda_carrier, lambda_msg, loss_type) -> Tuple[torch.Tensor, defaultdict]:
     try:
@@ -407,11 +516,25 @@ class Solver(object):
             avg_carrier_loss, avg_msg_loss = 0, 0
             carrier_snr_list = []
             msg_snr_list = []
+            carrier_pesq_list = []
+            msg_pesq_list = []
+            carrier_stoi_list = []
+            msg_stoi_list = []
+            warned_missing_pesq = False
+            warned_missing_stoi = False
+            warned_missing_phase = False
+            should_calc_stoi = self.model_type == 'normal' 
 
             logger.info(f"phase: {'test' if data == 'test' else 'validation'}")
             # start of training loop
             logger.info(f"start {'testing' if data == 'test' else 'validation'}...")
-            for carrier, msg in tqdm(test_dataloader):
+            for batch in tqdm(test_dataloader):
+                if len(batch) == 4:
+                    carrier, msg, carrier_phase, msg_phase = batch
+                else:
+                    carrier, msg = batch
+                    carrier_phase, msg_phase = None, None
+
                 try:
                     assert carrier.shape == msg.shape == spect_audio_shape
                 except AssertionError:
@@ -432,16 +555,77 @@ class Solver(object):
                 carrier_snr = snr(carrier, carrier_reconst)
                 carrier_snr_list.append(carrier_snr)
 
+                if (carrier_phase is not None or carrier.shape[1] == 2):
+                    carrier_pesq = pesq_score(self.stft, carrier, carrier_reconst, carrier_phase)
+                    msg_pesq = pesq_score(self.stft, msg, msg_reconst, msg_phase)
+                    if carrier_pesq is not None:
+                        carrier_pesq_list.append(carrier_pesq)
+                    if msg_pesq is not None:
+                        msg_pesq_list.append(msg_pesq)
+                    if (carrier_pesq is None or msg_pesq is None) and pesq is None and not warned_missing_pesq:
+                        logger.warning("PESQ is not available. Install it with `pip install pesq`.")
+                        warned_missing_pesq = True
+                    if should_calc_stoi:
+                        carrier_stoi = stoi_score(self.stft, carrier, carrier_reconst, carrier_phase)
+                        msg_stoi = stoi_score(self.stft, msg, msg_reconst, msg_phase)
+                        if carrier_stoi is not None:
+                            carrier_stoi_list.append(carrier_stoi)
+                        if msg_stoi is not None:
+                            msg_stoi_list.append(msg_stoi)
+                        if (carrier_stoi is None or msg_stoi is None) and stoi is None and not warned_missing_stoi:
+                            logger.warning("STOI is not available. Install it with `pip install pystoi`.")
+                            warned_missing_stoi = True
+                elif not warned_missing_phase:
+                    logger.warning("PESQ/STOI was skipped because this dataloader did not return phase tensors.")
+                    warned_missing_phase = True
+
             logger.info(f"finished {'testing' if data == 'test' else 'validation'}!")
             logger.info(f"carrier loss: {avg_carrier_loss/len(test_dataloader)}")
             logger.info(f"carrier SnR: {np.mean(carrier_snr_list)}")
+
+
+            if carrier_pesq_list:
+                logger.info(f"carrier PESQ: {np.mean(carrier_pesq_list)}")
+            else:
+                logger.info("carrier PESQ: not calculated")
+            if should_calc_stoi:
+                if carrier_stoi_list:
+                    logger.info(f"carrier STOI: {np.mean(carrier_stoi_list)}")
+                else:
+                    logger.info("carrier STOI: not calculated")
             logger.info(f"message loss: {avg_msg_loss/len(test_dataloader)}")
             logger.info(f"message SnR: {np.mean(msg_snr_list)}")
 
-            # log validation/test metrics via Solver logging helper to ensure monotonic steps
-            self.log_losses({ "carrier_snr": np.mean(carrier_snr_list), "msg_snr": np.mean(msg_snr_list) }, iteration=self.cur_iter)
 
-        return {'val epoch carrier loss': avg_carrier_loss/len(test_dataloader),
-                'val epoch msg loss': avg_msg_loss/len(test_dataloader),
-                'val epoch carrier SnR': np.mean(carrier_snr_list),
-                'val epoch msg SnR': np.mean(msg_snr_list)}
+            if msg_pesq_list:
+                logger.info(f"message PESQ: {np.mean(msg_pesq_list)}")
+            else:
+                logger.info("message PESQ: not calculated")
+            if should_calc_stoi:
+                if msg_stoi_list:
+                    logger.info(f"message STOI: {np.mean(msg_stoi_list)}")
+                else:
+                    logger.info("message STOI: not calculated")
+
+            # log validation/test metrics via Solver logging helper to ensure monotonic steps
+            metrics = { "carrier_snr": np.mean(carrier_snr_list), "msg_snr": np.mean(msg_snr_list) }
+            if carrier_stoi_list:
+                metrics["carrier_stoi"] = np.mean(carrier_stoi_list)
+            if msg_stoi_list:
+                metrics["msg_stoi"] = np.mean(msg_stoi_list)
+
+            self.log_losses(metrics, iteration=self.cur_iter)
+
+        results = {'val epoch carrier loss': avg_carrier_loss/len(test_dataloader),
+                   'val epoch msg loss': avg_msg_loss/len(test_dataloader),
+                   'val epoch carrier SnR': np.mean(carrier_snr_list),
+                   'val epoch msg SnR': np.mean(msg_snr_list)}
+        if  carrier_pesq_list:
+            results['val epoch carrier PESQ'] = np.mean(carrier_pesq_list)
+        if  msg_pesq_list:
+            results['val epoch msg PESQ'] = np.mean(msg_pesq_list)
+        if  carrier_stoi_list:
+            results['val epoch carrier STOI'] = np.mean(carrier_stoi_list)
+        if  msg_stoi_list:
+            results['val epoch msg STOI'] = np.mean(msg_stoi_list)
+        return results

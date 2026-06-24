@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+from os.path import join
 from loguru import logger
 from torch.optim.lr_scheduler import StepLR
 from portable_udh import get_hiding_unet, get_reveal_net, count_params
@@ -146,16 +147,18 @@ class TestEncoder(nn.Module):
 
 
 def load_models(encoder, decoder, ckpt_dir):
-    encoder.load_state_dict(torch.load(join(ckpt_dir, "encoder.ckpt")))
-    decoder.load_state_dict(torch.load(join(ckpt_dir, "decoder.ckpt")))
+    encoder.load_state_dict(torch.load(join(ckpt_dir, "encoder.ckpt"), map_location=device))
+    decoder.load_state_dict(torch.load(join(ckpt_dir, "decoder.ckpt"), map_location=device))
     logger.info("loader models")
 
 def get_models(hparams):
-    
+    # spect_channels = 2 if getattr(hparams, 'spect_repr', 'complex') == 'complex' else 1
+    spect_channels = 1
     if hparams.model_type == 'normal':
-        dec_um_conv_dim = 1 + 64
+        dec_um_conv_dim = spect_channels + 64
         # dec_um_conv_dim=64
         encoder = FullEncoder(
+            conv_dim=spect_channels,
             block_type=hparams.block_type,
             enc_n_layers=hparams.enc_n_layers,
             dec_um_conv_dim=dec_um_conv_dim,
@@ -163,13 +166,15 @@ def get_models(hparams):
         ).to(device)
 
         decoder = MsgDecoder(
-            conv_dim=1,
+            conv_dim=spect_channels,
+            out_dim=spect_channels,
             block_type=hparams.block_type
         ).to(device)
 
     elif hparams.model_type == 'unet':
-        encoder = get_hiding_unet(input_nc=1+1, output_nc=1, num_downs=5, norm='instance', use_dropout=False).to(device)
-        decoder = get_reveal_net(input_nc=1, output_nc=1, norm='instance').to(device)
+        output_function = 'tanh' if spect_channels == 2 else 'sigmoid'
+        encoder = get_hiding_unet(input_nc=spect_channels+spect_channels, output_nc=spect_channels, num_downs=5, norm='instance', use_dropout=False, output_function=output_function).to(device)
+        decoder = get_reveal_net(input_nc=spect_channels, output_nc=spect_channels, norm='instance', output_function=output_function).to(device)
 
     else:
         raise ValueError(f"Unsupported model_type: {hparams.model_type}")
@@ -188,12 +193,14 @@ def get_models(hparams):
 
 
 class FullEncoder(nn.Module):
-    def __init__(self, block_type, enc_n_layers, dec_um_conv_dim, dec_c_n_layers) -> None:
+    def __init__(self, block_type, enc_n_layers, dec_um_conv_dim, dec_c_n_layers, conv_dim=1) -> None:
         super().__init__()
-        self.encoder_first = Encoder(block_type=block_type,
+        self.encoder_first = Encoder(conv_dim=conv_dim,
+                                block_type=block_type,
                                 n_layers=enc_n_layers)
 
         self.encoder_second = CarrierDecoder(conv_dim=dec_um_conv_dim,
+                                        out_dim=conv_dim,
                                         block_type=block_type,
                                         n_layers=dec_c_n_layers)
         
@@ -348,7 +355,7 @@ class Encoder(nn.Module):
         return h
 
 class CarrierDecoder(nn.Module):
-    def __init__(self, conv_dim, block_type='normal', n_layers=4):
+    def __init__(self, conv_dim, out_dim=1, block_type='normal', n_layers=4):
         super(CarrierDecoder, self).__init__()
         block = {'normal': GatedBlock,
                  'skip': SkipGatedBlock,
@@ -361,7 +368,7 @@ class CarrierDecoder(nn.Module):
         for i in range(n_layers-2):
             layers.append(block(c_in=64, c_out=64, kernel_size=3, stride=1, padding=1, deconv=False))
 
-        layers.append(block(c_in=64, c_out=1, kernel_size=1, stride=1, padding=0, deconv=False))
+        layers.append(block(c_in=64, c_out=out_dim, kernel_size=1, stride=1, padding=0, deconv=False))
 
         self.main = nn.Sequential(*layers)
 
@@ -370,7 +377,7 @@ class CarrierDecoder(nn.Module):
         return h
 
 class MsgDecoder(nn.Module):
-    def __init__(self, conv_dim=1, block_type='normal'):
+    def __init__(self, conv_dim=1, out_dim=1, block_type='normal'):
         super(MsgDecoder, self).__init__()
         block = {'normal': GatedBlock,
                  'skip': SkipGatedBlock,
@@ -384,7 +391,7 @@ class MsgDecoder(nn.Module):
                 block(c_in=64, c_out=64, kernel_size=3, stride=1, padding=1, deconv=False),
                 block(c_in=64, c_out=64, kernel_size=3, stride=1, padding=1, deconv=False),
                 block(c_in=64, c_out=64, kernel_size=3, stride=1, padding=1, deconv=False),
-                block(c_in=64, c_out=1, kernel_size=3, stride=1, padding=1, deconv=False)
+                block(c_in=64, c_out=out_dim, kernel_size=3, stride=1, padding=1, deconv=False)
                 )
 
     def forward(self, x):

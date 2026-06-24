@@ -2,24 +2,95 @@ import random
 from typing import List, Tuple, Union
 
 import numpy as np
-import soundfile
 import torch
 import torch.utils.data as data
 from torch.utils.data import DataLoader
-from boltons import fileutils
+try:
+    from boltons import fileutils
+except ImportError:
+    fileutils = None
 from hparams import AUDIO_LEN
 
 
 import hparams
 from stft.stft import STFT
 
+import config
 from config import DEBUG, debug_print
 
+try:
+    import soundfile
+except ImportError:
+    soundfile = None
+
+try:
+    from scipy.io import wavfile
+except ImportError:
+    wavfile = None
+
+try:
+    import torchaudio
+except ImportError:
+    torchaudio = None
+
+
+def read_audio(path: str):
+    if soundfile is not None:
+        return soundfile.read(path)
+    if torchaudio is not None:
+        y, sr = torchaudio.load(path)
+        y = y.mean(dim=0).numpy().astype(np.float32)
+        return y, sr
+    if wavfile is None:
+        raise ImportError("Install soundfile, torchaudio, or scipy to load wav files.")
+
+    sr, y = wavfile.read(path)
+    y = np.asarray(y)
+    if y.ndim > 1:
+        y = y.mean(axis=1)
+    if np.issubdtype(y.dtype, np.integer):
+        y = y.astype(np.float32) / float(np.iinfo(y.dtype).max)
+    else:
+        y = y.astype(np.float32)
+    return y, sr
+
+
+def _spect_repr():
+    return getattr(config.gl_hparams, 'spect_repr', 'mag') if config.gl_hparams is not None else 'mag'
+
+
+def stft_features(magnitude: torch.Tensor, phase: torch.Tensor) -> torch.Tensor:
+    # if _spect_repr() == 'complex':
+    #     real = magnitude * torch.cos(phase)
+    #     imag = magnitude * torch.sin(phase)
+    #     return torch.cat([real, imag], dim=0)
+    return magnitude
+
+
+def _msg_binary_watermark():
+    return getattr(config.gl_hparams, 'msg_binary_watermark', False) if config.gl_hparams is not None else False
+
+
+def audio_to_binary_watermark(msg_spect: torch.Tensor) -> torch.Tensor:
+    threshold = msg_spect.mean()
+    return (msg_spect > threshold).to(dtype=msg_spect.dtype)
+
+
+def find_wav_files(path: str) -> List[str]:
+    if fileutils is not None:
+        return list(fileutils.iter_find_files(path, "*.wav"))
+
+    import pathlib
+
+    root = pathlib.Path(path)
+    wav_files = sorted(str(p) for p in root.rglob("*.wav"))
+    wav_files.extend(sorted(str(p) for p in root.rglob("*.WAV")))
+    return wav_files
 
 
 def spect_loader(path:str, trim_start:int, return_phase=False, num_samples=16000, crop=True) -> Union[torch.Tensor, 
                                                                                                       Tuple[torch.Tensor, torch.Tensor]]:
-    y, _ = soundfile.read(path)
+    y, _ = read_audio(path)
 
     if crop:
         y = y[trim_start: trim_start + num_samples]  # trim 'trim_start' from start and crop 1 sec
@@ -30,7 +101,8 @@ def spect_loader(path:str, trim_start:int, return_phase=False, num_samples=16000
     stft = STFT(hparams.N_FFT, hparams.HOP_LENGTH)
     y = torch.FloatTensor(y).unsqueeze(0)
     assert y.shape == (1, num_samples)
-    spect, phase = stft.transform(y)
+    magnitude, phase = stft.transform(y)
+    spect = stft_features(magnitude, phase)
 
     # # Magnitude Spectrum (振幅谱)
     # magnitude = spect.abs()
@@ -118,7 +190,7 @@ def spect_loader(path:str, trim_start:int, return_phase=False, num_samples=16000
 
 def make_single_dataset(path, message_file, n_pairs):
     pairs = []
-    wav_files = list(fileutils.iter_find_files(path, "*.wav"))
+    wav_files = find_wav_files(path)
 
     for _ in range(n_pairs):
         sampled_file = random.sample(wav_files, 1)[0]
@@ -128,7 +200,7 @@ def make_single_dataset(path, message_file, n_pairs):
 
 def make_pairs_dataset(path: str, n_pairs: int) -> List[Tuple[str, str]]:
     pairs = []
-    wav_files = list(fileutils.iter_find_files(path, "*.wav"))
+    wav_files = find_wav_files(path)
 
     for _ in range(n_pairs):
         sampled_files = random.sample(wav_files, 2)
@@ -171,17 +243,29 @@ class TimitSingleDatasetWithThreeChannels(data.Dataset):
 
 class TimitSingleDataset(data.Dataset):
     def __init__(self, root, message_file, n_pairs=10000,
-                       trim_start=0, num_samples=16000):
+                       trim_start=0, num_samples=16000, test=False):
        random.seed(0)
        self.spect_pairs = make_single_dataset(root, message_file, n_pairs)
        self.loader = spect_loader
        self.trim_start = int(trim_start)
        self.num_samples = num_samples
+       self.test = test
 
     def __getitem__(self, index):
         carrier_file, msg_file = self.spect_pairs[index]
-        carrier_spect = self.loader(carrier_file, self.trim_start, num_samples=self.num_samples)
-        msg_spect     = self.loader(msg_file, self.trim_start, num_samples=self.num_samples)
+        carrier_spect, carrier_phase = self.loader(carrier_file,
+                                                   self.trim_start,
+                                                   return_phase=True,
+                                                   num_samples=self.num_samples)
+        msg_spect, msg_phase = self.loader(msg_file,
+                                           self.trim_start,
+                                           return_phase=True,
+                                           num_samples=self.num_samples)
+        if _msg_binary_watermark():
+            msg_spect = audio_to_binary_watermark(msg_spect)
+
+        if self.test:
+            return carrier_spect, msg_spect, carrier_phase, msg_phase
         
         return carrier_spect, msg_spect
 
@@ -215,15 +299,21 @@ class TimitDataset(data.Dataset):
                                                    return_phase=True,
                                                    num_samples=self.num_samples)
         
-        msg_spect, _ = self.loader(msg_file,
+        msg_spect, msg_phase = self.loader(msg_file,
                                            self.trim_start,
                                            return_phase=True,
                                            num_samples=self.num_samples)
+        if _msg_binary_watermark():
+            msg_spect = audio_to_binary_watermark(msg_spect)
 
         if self.transform is not None:
             carrier_spect = self.transform(carrier_spect)
             carrier_phase= self.transform(carrier_phase)
             msg_spect = self.transform(msg_spect)
+            msg_phase = self.transform(msg_phase)
+
+        if self.test:
+            return carrier_spect, msg_spect, carrier_phase, msg_phase
 
         return carrier_spect, msg_spect
 
@@ -316,7 +406,8 @@ def unet_val_single_dataloader(val_path, message_file, batch_size, num_workers):
                                n_pairs     = 832,
                                # n_pairs=32,
                                trim_start  = trim_start,
-                               num_samples = num_samples)
+                               num_samples = num_samples,
+                               test        = True)
     val_dataloader = DataLoader(val_dataset,
                                 batch_size  = batch_size,
                                 shuffle     = False,
@@ -332,7 +423,8 @@ def val_single_dataloader(val_path, message_file, batch_size, num_workers):
                                n_pairs     = 832,
                                # n_pairs=32,
                                trim_start  = trim_start,
-                               num_samples = num_samples)
+                               num_samples = num_samples,
+                               test        = True)
     val_dataloader = DataLoader(val_dataset,
                                 batch_size  = batch_size,
                                 shuffle     = False,
@@ -343,12 +435,13 @@ def val_single_dataloader(val_path, message_file, batch_size, num_workers):
 def test_single_dataloader(test_path, message_file, batch_size):
     trim_start  = int(0.6*16000)
     num_samples = AUDIO_LEN * 16000
-    test_dataset = TimitDataset(test_path,
+    test_dataset = TimitSingleDataset(test_path,
                                 message_file,
                                 n_pairs     = 832,
                                 # n_pairs=32,
                                 trim_start  = trim_start,
-                                num_samples = num_samples)
+                                num_samples = num_samples,
+                                test        = True)
     test_dataloader = DataLoader(test_dataset,
                                  batch_size  = batch_size,
                                  shuffle     = False,

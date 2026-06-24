@@ -44,6 +44,7 @@ def get_hparams():
 
     parser.add_argument('--single', type=bool, default=False)
     parser.add_argument('--message_file', type=str)
+    parser.add_argument('--msg_binary_watermark', action='store_true', help='convert message audio spectrogram to a binary watermark')
 
     parser.add_argument('--model_type', type=str, default='normal', choices=['normal','GAN','unet'], help='type of model')
     parser.add_argument('--freeze_num', type=int, default=1, help='num of epochs to freeze discriminator')
@@ -54,4 +55,3 @@ def get_hparams():
 
     gl_hparams = parser.parse_args()
     return gl_hparams
-
